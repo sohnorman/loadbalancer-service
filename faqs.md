@@ -42,7 +42,7 @@ The default settings and allowed values are listed below:
 
 ## Can I use compute instances residing in remote data centers with this service? 
 
-It is recommended that your load balancer service and your compute instances reside locally within the same data center. The load balancer service’s graphical interface (GUI) will not show compute instances from other remote data centers. You may use the API interface to add compute instances from any remote data center though. 
+It is recommended that your load balancer service and your compute instances reside locally within the same data center. The load balancer service’s graphical interface (GUI) will not show compute instances from other remote data centers. However, the GUI will include compute instances from other data centers within same city (for example, data centers whose names share the first three letters, such as DALxx). You may use the API interface to add compute instances from any remote data center though. 
 
 ## Which TLS version is supported with SSL offload? Which ciphers are supported?
 
