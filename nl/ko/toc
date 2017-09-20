@@ -1,0 +1,24 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="loadbalancer-service" audience="direct-link" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
+IBM Bluemix Load Balancer 서비스
+
+    {: .navgroup id="learn"}
+    getting-started.md
+    about.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    basic-load-balancing.md
+    health-checks.md
+    ssl-offload.md
+    advanced-traffic.md
+    {: .navgroup-end}
+
+    {: .navgroup id="help"}
+    apis.md
+    faqs.md
+    known-limitations.md
+    getting-help.md
+    {: .navgroup-end}
