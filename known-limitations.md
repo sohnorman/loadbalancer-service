@@ -24,6 +24,7 @@ The IBM Bluemix Load Balancer Service currently has the following issues:
 * Minor - During the initial creation of the load balancer service, you will lose your custom health check settings if you go back and forth between various screens.
 * Minor - You may experience some issues while using Internet Explorer 11, Edge or Safari browsers for administering the load balancer service. As an alternative, please use either the Firefox or Chrome browser. 
 * Cosmetic - During the initial service creation, the drop-down list for the data centers may be skewed. Regardless, you will still be able to select your desired data center.
+* Cosmetic - The pricing information on the review page is rounded off to two decimal digits. For correct pricing, please refer to pricing displayed on the plan page.
 
 ## Known Limitations
 The IBM Bluemix Load Balancer Service currently has the following limitations:
