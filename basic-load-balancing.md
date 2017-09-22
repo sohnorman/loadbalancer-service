@@ -35,7 +35,7 @@ The supported front-end ports/protocols are HTTP, HTTPS and TCP. The supported b
 * All ten front-end ports must map to the same set of back-end server instances.
 * The maximum number of server instances that may be placed behind a load balancer is 50.
 * The port range of 56500 to 56520 is reserved for management purposes and cannot be used as front-end virtual ports. 
-* TCP port 56501 is used for management. Please ensure that traffic to this port as well as your application's ports are allowed by any firewalls deployed on your public network.
+* TCP port 56501 is used for management. Please ensure that traffic to this port as well as your application's ports are not blocked by any firewalls you may have deployed on your public VLANs.
 
 ## Load Balancing Methods
 The following three load balancing methods are available for distributing traffic among back-end application servers:
