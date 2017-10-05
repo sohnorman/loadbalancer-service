@@ -5,8 +5,8 @@
 IBM Bluemix Load Balancer Service
 
     {: .navgroup id="learn"}
-    about.md
     getting-started.md
+    about.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
