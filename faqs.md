@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -75,4 +75,8 @@ Not at this time.
 
 Currently, you may create up to 20 service instances. If you need more instances, then please contact IBM Support. 
 
+## Can the Load Balancer as a Service be used with VMWare? 
 
+VMware virtual machines assigned SoftLayer portable private addresses can be specified as backend servers to the load balancer. This feature is currently available only via the API, and not the web UI (GUI). Portable private IPs added via the API appear as "Unknown" in the GUI, as they are not assigned by SoftLayer. Note that this kind of configuration can be used with other Hypervisors such as Xen and KVM as well.
+
+VMware virtual machines assigned non-SoftLayer addresses (such as with VMware NSX networks) cannot be added directly as backend servers to the load balancer. However, depending on your configuration, it may be possible to configure an intermediary such as an NSX gateway that has a SoftLayer private address as the backend server to the load balancer (with the actual servers being VMs attached to network(s) managed by VMware NSX).
