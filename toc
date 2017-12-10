@@ -2,11 +2,12 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="loadbalancer-service" audience="network" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
-IBM Bluemix Load Balancer Service
+IBM Cloud Load Balancer Service
 
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    naas-overview.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}

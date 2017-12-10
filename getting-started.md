@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 
 # Getting Started
 
-To get started with the IBM Bluemix Load Balancer service, select **Network > Load Balancers > IBM Bluemix Load Balancer** from the Bluemix catalog, then perform the following procedure:
+To get started with the IBM Cloud Load Balancer service, select **Network > Load Balancers > IBM Cloud Load Balancer** from the IBM Cloud catalog, then perform the following procedure:
 
 1. Select your data center and review the service plan. Click **Next**.
 2. Select the subnet to which you'd like to deploy your load balancer. Your load balancer service instance will have one of its network interfaces on this subnet. Ensure that your application servers are either on this subnet or reachable from this subnet. If necessary, enable VLAN spanning. Click **Next**.

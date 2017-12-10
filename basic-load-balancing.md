@@ -15,7 +15,7 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # Basic Load Balancing
-The IBM Bluemix load balancer service distributes traffic among multiple server instances (bare metal and virtual server) that reside locally, within the same data center. 
+The IBM Cloud load balancer service distributes traffic among multiple server instances (bare metal and virtual server) that reside locally, within the same data center. 
 
 ## Public Load Balancer 
 A publicly-accessible, fully qualified domain name is assigned to your load balancer service instance. You may use this domain name to access your applications hosted behind the load balancer service. The backend compute instances hosting your application must be on an IBM Cloud private network. 

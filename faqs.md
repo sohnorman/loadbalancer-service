@@ -16,7 +16,7 @@ lastupdated: "2017-11-02"
 
 # FAQs
 
-This section contains answers to some frequently asked questions about IBM Bluemix Load Balancer Service.
+This section contains answers to some frequently asked questions about IBM Cloud Load Balancer Service.
 
 ## If I have a firewall deployed on my public VLAN, what configurations are required on my firewall to work with my load balancer service?
 
@@ -32,7 +32,7 @@ While trying to create a new load balancer service, you may define up to two vir
 
 ## Can I create an internal-only, private load balancer that can only be accessed by internal clients?  
 
-Not at this time. The service hosted on the IBM Bluemix load balancer will be assigned a fully qualified domain name accessible from the public Internet. 
+Not at this time. The service hosted on the IBM Cloud load balancer will be assigned a fully qualified domain name accessible from the public Internet. 
 
 ## What are the default settings and allowed values for various health check parameters?
 
@@ -50,7 +50,7 @@ It is recommended that your load balancer service and your compute instances res
 
 ## Which TLS version is supported with SSL offload? Which ciphers are supported?
 
-The Bluemix Load Balancer Service supports TLS 1.2 with SSL termination. 
+The Cloud Load Balancer Service supports TLS 1.2 with SSL termination. 
 
 The following list details the supported ciphers (listed in order of precedence):  
 

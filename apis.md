@@ -27,7 +27,7 @@ The SoftLayer API is a Remote Procedure Call system. Each call involves sending 
 in return. The format used to send and receive data with the SLAPI depends on which implementation of the API you choose. The SLAPI
 currently uses SOAP, XML-RPC or REST for data transmission. 
 
-For more information about the SoftLayer API, IBM Bluemix Load Balancer Service APIs, see the following resources in the SoftLayer 
+For more information about the SoftLayer API, IBM Cloud Load Balancer Service APIs, see the following resources in the SoftLayer 
 Development Network:
 * [SoftLayer API Overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [Getting Started with the SoftLayer API ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://sldn.softlayer.com/article/getting-started){: new_window}

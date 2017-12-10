@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 # Sample Configuration Flow
 The GUI screens in this section are mock-up screens only. The actual screens may vary. 
 
-1. Begin by logging into your IBM Softlayer Bluemix account using your regular login ID. Click **Add New** to begin.
+1. Begin by logging into your IBM Cloud account using your regular login ID. Click **Add New** to begin.
 
 2. Pick your data center and review the plan information, then click **Next**. 
 
