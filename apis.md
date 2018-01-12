@@ -161,7 +161,11 @@ userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
-    useHourlyPricing=True # Required since LBaaS is an hourly service
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -228,7 +232,11 @@ userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
-    useHourlyPricing=True # Required since LBaaS is an hourly service
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API

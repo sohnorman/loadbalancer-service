@@ -18,9 +18,9 @@ lastupdated: "2017-11-02"
 
 This section contains answers to some frequently asked questions about IBM Cloud Load Balancer Service.
 
-## If I have a firewall deployed on my public VLAN, what configurations are required on my firewall to work with my load balancer service?
+## Can I use a different DNS name for my load balancer?
 
-TCP port 56501 is used for management. Please ensure that traffic to this port as well as your application's ports are not blocked by your firewall.
+While the auto-assigned DNS name for the load balancer is not customizable, you can add a CNAME (Canonical Name) record that points your preferred DNS name to the auto-assigned load balancer DNS name. For example, your account number is 123456, your load balancer is deployed in "dal09" datacenter and its name is "myapp", the auto-assigned load balancer DNS name is "myapp-123456-dal09.lb.bluemix.net". Your preferred DNS name is "www.myapp.com". You may add a CNAME record (via the DNS provider that you use to manage myapp.com) pointing "www.myapp.com" to the load balancer DNS name "myapp-12345-dal09.lb.bluemix.net".
 
 ## What's the maximum number of virtual ports I can define with my load balancer service?
 
@@ -80,3 +80,8 @@ Currently, you may create up to 20 service instances. If you need more instances
 VMware virtual machines assigned SoftLayer portable private addresses can be specified as backend servers to the load balancer. This feature is currently available only via the API, and not the web UI (GUI). Portable private IPs added via the API appear as "Unknown" in the GUI, as they are not assigned by SoftLayer. Note that this kind of configuration can be used with other Hypervisors such as Xen and KVM as well.
 
 VMware virtual machines assigned non-SoftLayer addresses (such as with VMware NSX networks) cannot be added directly as backend servers to the load balancer. However, depending on your configuration, it may be possible to configure an intermediary such as an NSX gateway that has a SoftLayer private address as the backend server to the load balancer (with the actual servers being VMs attached to network(s) managed by VMware NSX).
+
+## If I choose to use a public VLAN under my account to deploy my load balancer and I have a firewall deployed on my public VLAN, what configurations are required on my firewall to work with my load balancer service?
+
+TCP port 56501 is used for management. Please ensure that traffic to this port as well as your application's ports are not blocked by your firewall, otherwise load balancer provisioning will fail.
+

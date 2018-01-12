@@ -31,4 +31,3 @@ The IBM Cloud Load Balancer Service currently has the following limitations:
 
 * Maximum number of virtual ports/protocols - 10
 * Maximum number of servers behind load balancer - 50
-* TCP port 56501 is used for management. Please ensure that traffic to this port is not blocked by any firewalls you may have deployed on your public VLANs.
