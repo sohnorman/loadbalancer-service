@@ -7,6 +7,7 @@ IBM Cloud Load Balancer Service
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    explore-load-balancers.md
     naas-overview.md
     {: .navgroup-end}
 
