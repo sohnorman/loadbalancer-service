@@ -18,6 +18,10 @@ lastupdated: "2017-11-02"
 
 This section contains answers to some frequently asked questions about IBM Cloud Load Balancer Service.
 
+## How many load balancing options are available in {{site.data.keyword.BluSoftlayer_notm}}?
+
+For a detailed comparison of IBM's Load Balancer offerings, refer to [Explore Load Balancers](https://dev-console.bluemix.net/docs/infrastructure/loadbalancer-service/explore-load-balancers.html#explore-load-balancers).
+
 ## Can I use a different DNS name for my load balancer?
 
 While the auto-assigned DNS name for the load balancer is not customizable, you can add a CNAME (Canonical Name) record that points your preferred DNS name to the auto-assigned load balancer DNS name. For example, your account number is 123456, your load balancer is deployed in "dal09" datacenter and its name is "myapp", the auto-assigned load balancer DNS name is "myapp-123456-dal09.lb.bluemix.net". Your preferred DNS name is "www.myapp.com". You may add a CNAME record (via the DNS provider that you use to manage myapp.com) pointing "www.myapp.com" to the load balancer DNS name "myapp-12345-dal09.lb.bluemix.net".
