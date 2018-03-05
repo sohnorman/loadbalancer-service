@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 
 # 入门
 
-要开始使用 IBM Bluemix Load Balancer 访问，请从 Bluemix 目录选择**网络 > Load Balancer > IBM Bluemix Load Balancer**，然后执行以下过程：
+要开始使用 IBM Cloud Load Balancer 服务访问，请从 IBM Cloud 目录选择**网络 > Load Balancer > IBM Cloud Load Balancer**，然后执行以下过程：
 
 1. 选择数据中心并复查服务套餐。单击**下一步**。
 2. 选择要将 Load Balancer 部署到的子网。您的 Load Balancer 服务实例将在此子网上具有其中一个网络接口：请确保应用程序服务器位于此子网上或可从此子网进行访问。如果必要，请启用 VLAN 生成。单击**下一步**。

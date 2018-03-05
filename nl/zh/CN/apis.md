@@ -23,8 +23,7 @@ SoftLayer API (SLAPI) 在客户门户网站中提供许多功能，这通常意�
 
 SoftLayer API 是远程过程调用系统。每个调用都涉及向 API 端点发送数据以及接收所返回的结构化数据。通过 SLAPI 发送和接收数据时所使用的格式将取决于您所选择的 API 实现。SLAPI 当前使用 SOAP、XML-RPC 或 REST 进行数据传输。 
 
-有关 SoftLayer API、IBM Bluemix Load Balancer 服务 API 的更多信息，请参阅 SoftLayer 开发网络中的以下资源：
-
+有关 SoftLayer API、IBM Cloud Load Balancer 服务 API 的更多信息，请参阅 SoftLayer 开发网络中的以下资源：
 * [SoftLayer API 概述 ![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [SoftLayer API 入门 ![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](http://sldn.softlayer.com/article/getting-started){: new_window}
 * [SoftLayer_Product_Package API ![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
@@ -102,9 +101,11 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
+{: codeblock}
+
 ### 验证 Load Balancer 订单
 ```
 from zeep import Client, xsd 
@@ -122,7 +123,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -154,7 +155,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -169,6 +175,8 @@ try:
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
+{: codeblock}
+
 ### 下 Load Balancer 订单
 ```
 from zeep import Client, xsd 
@@ -186,7 +194,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805 
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -218,7 +226,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -234,6 +247,7 @@ try:
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
 ## 获取 Load Balancer 的示例
 ### 列出所有 Load Balancer
@@ -261,6 +275,8 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
+{: codeblock}
+
 ### 检索特定 Load Balancer 的详细信息
 ```
 from zeep import Client, xsd 
@@ -305,6 +321,7 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
 ## 更新 Load Balancer 的示例
 ### 添加成员
@@ -360,6 +377,8 @@ result = client.service.addLoadBalancerMembers(
 )
 print result
 ```
+{: codeblock}
+
 ### 添加协议
 ```
 from zeep import Client, xsd 
@@ -414,6 +433,7 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
 ## 取消 Load Balancer 的示例
 ### 取消 Load Balancer
@@ -456,3 +476,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}

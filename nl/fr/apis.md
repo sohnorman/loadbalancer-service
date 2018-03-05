@@ -15,14 +15,14 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # Référence d'API
-L'interface de programmation SoftLayer® permet aux développeurs et aux administrateurs système d'interagir directement avec le système backend de SoftLayer.
+L'interface de programmation SoftLayer® permet aux développeurs et aux administrateurs système d'interagir directement avec le système backend de SoftLayer. 
 {:shortdesc}
 
-L'interface de programmation SoftLayer (SLAPI) offre un grand nombre de fonctionnalités du portail client, ce qui signifie généralement que si une interaction est disponible dans le portail client, elle peut également être exécutée dans l'interface. Puisque vous pouvez interagir à l'aide d'un programme avec toutes les portions de l'environnement SoftLayer au sein de l'API, vous pouvez utiliser l'API pour automatiser les tâches. 
+L'interface de programmation SoftLayer (SLAPI) offre un grand nombre de fonctionnalités du portail client, ce qui signifie généralement que si une interaction est disponible dans le portail client, elle peut également être exécutée dans l'interface. Puisque vous pouvez interagir à l'aide d'un programme avec toutes les portions de l'environnement SoftLayer au sein de l'API, vous pouvez utiliser l'API pour automatiser les tâches.
 
 L'interface de programmation SoftLayer est un système à appel de procédure distante. Chaque appel implique l'envoi de données vers un noeud final d'API et la réception de données structurées en retour. Le format utilisé pour l'envoi et la réception de données à l'aide de SLAPI dépend de l'implémentation que vous avez choisie. L'interface SLAPI utilise actuellement SOAP, XML-RPC ou REST pour la transmission de données. 
 
-Pour plus d'informations sur l'API SoftLayer et les API du service IBM Bluemix Load Balancer, voir les ressources suivantes dans le réseau de développement SoftLayer :
+Pour plus d'informations sur l'API SoftLayer et les API du service d'équilibreur de charge IBM Cloud, voir les ressources suivantes dans le réseau de développement SoftLayer :
 * [SoftLayer API Overview ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [Getting Started with the SoftLayer API ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://sldn.softlayer.com/article/getting-started){: new_window}
 * [SoftLayer_Product_Package API ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
@@ -100,9 +100,11 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
+{: codeblock}
+
 ### Vérification de la commande de l'équilibreur de charge
 ```
 from zeep import Client, xsd 
@@ -120,7 +122,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -152,7 +154,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -167,6 +174,8 @@ try:
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
+{: codeblock}
+
 ### Commande de l'équilibreur de charge
 ```
 from zeep import Client, xsd 
@@ -184,7 +193,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805 
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -216,7 +225,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -232,6 +246,7 @@ try:
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
 ## Exemple d'obtention d'équilibreurs de charge
 ### Recensement de tous les équilibreurs de charge
@@ -259,6 +274,8 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
+{: codeblock}
+
 ### Obtention des détails relatifs à un équilibreur de charge spécifique
 ```
 from zeep import Client, xsd 
@@ -303,6 +320,7 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
 ## Exemple de mise à jour d'un équilibreur de charge
 ### Ajout d'un membre
@@ -358,6 +376,8 @@ result = client.service.addLoadBalancerMembers(
 )
 print result
 ```
+{: codeblock}
+
 ### Ajout d'un protocole
 ```
 from zeep import Client, xsd 
@@ -412,6 +432,7 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
 ## Exemple d'annulation d'un équilibreur de charge
 ### Annulation d'un équilibreur de charge
@@ -454,3 +475,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}

@@ -16,18 +16,18 @@ lastupdated: "2017-08-21"
 
 # API 참조
 SoftLayer® API(Application Programming Interface)는 SoftLayer의 백엔드 시스템을 사용하여 개발자와 시스템 관리자에게 직접적인 상호작용을
-제공하는 개발 인터페이스입니다.
+제공하는 개발 인터페이스입니다. 
 {:shortdesc}
 
 SoftLayer API(SLAPI)는 고객 포털의 여러 기능을 제공합니다. 즉, 일반적으로 상호작용이 고객 포털에 사용 가능한 경우 API에도
 실행될 수 있습니다. 프로그래밍 방식으로 API 내 SoftLayer 환경의 모든 부분과 상호작용할 수 있으므로 API를 사용하여 태스크를
-자동화할 수 있습니다. 
+자동화할 수 있습니다.
 
 SoftLayer API는 원격 프로시저 호출(RPC) 시스템입니다. 각 호출에는 API 엔드포인트로 데이터를 송신하고 구조화된 데이터를 수신하는
 과정이 포함됩니다. SLAPI를 통해 데이터를 송수신할 때 사용되는 형식은 사용자가 선택한 API 구현에 따라 다릅니다. 현재 SLAPI에서는
-데이터 전송에 SOAP, XML-RPC 또는 REST를 사용합니다.  
+데이터 전송에 SOAP, XML-RPC 또는 REST를 사용합니다. 
 
-SoftLayer API, IBM Bluemix Load Balancer 서비스 API에 대한 자세한 정보는 SoftLayer
+SoftLayer API 및 IBM Cloud 로드 밸런서 서비스 API에 대한 자세한 정보는 SoftLayer
 Development Network의 다음 자원을 참조하십시오. 
 * [SoftLayer API Overview ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [Getting Started with the SoftLayer API ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")](http://sldn.softlayer.com/article/getting-started){: new_window}
@@ -37,7 +37,7 @@ Development Network의 다음 자원을 참조하십시오.
 * [SoftLayer_Network_LBaaS_Member API ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
 * [SoftLayer_Network_LBaaS_HealthMonitor API ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
 
-다음은 zeep SOAP 클라이언트로 Python을 사용하는 예제입니다. 
+다음은 zeep SOAP 클라이언트로 Python을 사용하는 예제입니다.
 
 ## 로드 밸런서 작성 예제
 ### 제품 패키지 ID 및 항목 가격 검색
@@ -106,9 +106,11 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
+{: codeblock}
+
 ### 로드 밸런서 주문 확인
 ```
 from zeep import Client, xsd 
@@ -126,7 +128,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -158,7 +160,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -173,6 +180,8 @@ try:
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
+{: codeblock}
+
 ### 로드 밸런서 주문
 ```
 from zeep import Client, xsd 
@@ -187,10 +196,10 @@ privateSubnetId = '<Your subnet id>'
 # Order details
 # Package id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasPackageId = 805 
+lbaasPackageId = 805
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -222,7 +231,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -238,6 +252,7 @@ try:
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
 ## 로드 밸런서 가져오기 예제
 ### 모든 로드 밸런서 표시
@@ -265,6 +280,8 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
+{: codeblock}
+
 ### 특정 로드 밸런서의 세부사항 검색
 ```
 from zeep import Client, xsd 
@@ -309,6 +326,7 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
 ## 로드 밸런서 업데이트 예제
 ### 구성원 추가
@@ -364,6 +382,8 @@ result = client.service.addLoadBalancerMembers(
 )
 print result
 ```
+{: codeblock}
+
 ### 프로토콜 추가
 ```
 from zeep import Client, xsd 
@@ -418,6 +438,7 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
 ## 로드 밸런서 취소 예제
 ### 로드 밸런서 취소
@@ -460,3 +481,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}

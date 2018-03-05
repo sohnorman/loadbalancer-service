@@ -1,12 +1,14 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="loadbalancer-service" audience="direct-link" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
-IBM Bluemix-Lastausgleichsfunktion
+{: .toc subcollection="loadbalancer-service" audience="network" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
+IBM Cloud Load Balancer-Service
 
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    explore-load-balancers.md
+    naas-overview.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -15,9 +17,12 @@ IBM Bluemix-Lastausgleichsfunktion
     ssl-offload.md
     advanced-traffic.md
     {: .navgroup-end}
+    
+    {: .navgroup id="reference"}
+    apis.md
+    {: .navgroup-end}
 
     {: .navgroup id="help"}
-    apis.md
     faqs.md
     known-limitations.md
     getting-help.md

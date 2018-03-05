@@ -16,10 +16,10 @@ lastupdated: "2017-08-21"
 
 # Produktinformation
 
-Der IBM Bluemix-Service für die Lastausgleichsfunktion unterstützt die Kunden beim Verbessern der Verfügbarkeit ihrer geschäftskritischen Anwendungen; dazu wird der Datenverkehr auf mehrere Anwendungsserverinstanzen verteilt und ausschließlich an ordnungsgemäß funktionierende Instanzen weitergeleitet. 
+Der IBM Cloud Load Balancer-Service unterstützt die Kunden beim Verbessern der Verfügbarkeit ihrer geschäftskritischen Anwendungen; dazu wird der Datenverkehr auf mehrere Anwendungsserverinstanzen verteilt und ausschließlich an ordnungsgemäß funktionierende Instanzen weitergeleitet. 
 
 ## Übersicht über die Features
-Der IBM Bluemix-Service für die Lastausgleichsfunktion bietet die folgenden Features: 
+Der IBM Cloud Load Balancer-Service bietet die folgenden Features:
 
 * Öffentliche Lastausgleichsfunktion (im Internet)
 	* Über vollständig qualifizierten Domänennamen öffentlich zugänglicher Service

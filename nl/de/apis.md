@@ -15,15 +15,15 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # API-Referenz
-Die API (Application Programming Interface) von SoftLayer® ist die Entwicklungsschnittstelle, die Entwicklern und Systemadministratoren die direkte Interaktion mit dem SoftLayer-Back-End-System ermöglicht.
+Die API (Application Programming Interface) von SoftLayer® ist die Entwicklungsschnittstelle, die Entwicklern und Systemadministratoren die direkte Interaktion mit dem SoftLayer-Back-End-System ermöglicht. 
 {:shortdesc}
 
-Die SoftLayer-API (SLAPI) unterstützt viele Funktionen im Kundenportal; dies bedeutet in der Regel, dass eine Interaktion, die im Kundenportal möglich ist, auch in der API ausgeführt werden kann. Da Sie mit allen Teilen der SoftLayer-Umgebung in der API programmgesteuert interagieren können, können Sie die API zum Automatisieren von Tasks verwenden. 
+Die SoftLayer-API (SLAPI) unterstützt viele Funktionen im Kundenportal; dies bedeutet in der Regel, dass eine Interaktion, die im Kundenportal möglich ist, auch in der API ausgeführt werden kann. Da Sie mit allen Teilen der SoftLayer-Umgebung in der API programmgesteuert interagieren können, können Sie die API zum Automatisieren von Tasks verwenden.
 
-Die SoftLayer-API ist ein Remote Procedure Call-System. Bei jedem Aufruf werden Daten zum API-Endpunkt gesendet und anschließend strukturierte Daten empfangen.
-Welches Format zum Senden und Empfangen der Daten mit der SLAPI verwendet wird, hängt von der jeweils ausgewählten Implementierung der API ab. Von der SLAPI werden derzeit SOAP, XML-RPC und REST für die Datenübertragung verwendet.  
+Die SoftLayer-API ist ein Remote Procedure Call-System. Bei jedem Aufruf werden Daten zum API-Endpunkt gesendet und anschließend strukturierte Daten empfangen. Welches Format zum Senden und Empfangen der Daten mit der SLAPI verwendet wird, hängt von der jeweils ausgewählten Implementierung der API ab. Von der SLAPI werden derzeit SOAP, XML-RPC und REST für die Datenübertragung verwendet. 
 
-Weitere Informationen zur SoftLayer-API und zu den APIs für den IBM Bluemix-Service für die Lastausgleichsfunktion finden Sie in den folgenden Ressourcen im SoftLayer Development Network: 
+Weitere Informationen zur SoftLayer-API und zu den IBM Cloud Load Balancer Service-APIs finden Sie in den folgenden Ressourcen
+im SoftLayer Development Network:
 * [Übersicht über SoftLayer-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [Einführung in die SoftLayer-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/article/getting-started){: new_window}
 * [SoftLayer_Product_Package-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
@@ -32,7 +32,7 @@ Weitere Informationen zur SoftLayer-API und zu den APIs für den IBM Bluemix-Ser
 * [SoftLayer_Network_LBaaS_Member-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
 * [SoftLayer_Network_LBaaS_HealthMonitor-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
 
-In den folgenden Beispielen wird Python mit einem Zeep-SOAP-Client verwendet. 
+In den folgenden Beispielen wird Python mit einem Zeep-SOAP-Client verwendet.
 
 ## Beispiel für das Erstellen einer Lastausgleichsfunktion
 ### Produktpaket-ID und Artikelpreis abrufen
@@ -101,9 +101,11 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
+{: codeblock}
+
 ### Bestellung der Lastausgleichsfunktion überprüfen
 ```
 from zeep import Client, xsd
@@ -115,13 +117,13 @@ apiKey = '<Your apiKey>'
 # Private Teilnetz-ID
 privateSubnetId = '<Your subnet id>'
 
-# Auftragszusatzinformationen
+# Bestellungsdetails
 # Von SoftLayer_Product_Package-API abgerufene Paket-ID
-# (oben angegebenes Beispiel)
+# (Beispiel siehe oben)
 lbaasPackageId = 805
 # Von SoftLayer_Product_Package-API abgerufene Artikelpreis-ID
-# (oben angegebenes Beispiel)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+# (Beispiel siehe oben)
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -153,7 +155,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Erforderlich, da LBaaS ein auf Stundenintervallen basierender Service ist
+    useSystemPublicIpPool=True  # Optional - Standardwert ist "True" für die Zuordnung von öffentlichen
+                                # IPs für die Lastausgleichsfunktion aus einem IBM Systempool,
+                                # andernfalls "False" für die Zuordnung aus dem öffentlichen VLAN
+                                # unter Ihrem Konto
 )
 
 # SLAPI-Aufruf an SoftLayer_Product_Order::verifyOrder-API ausführen
@@ -161,13 +168,15 @@ try:
     result = client.service.verifyOrder(
         _soapheaders=[userAuthValue],
         orderData=orderDataValue
-    )
+    )   
 
     print 'The order is valid!'
 
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
+{: codeblock}
+
 ### Bestellung für Lastausgleichsfunktion aufgeben
 ```
 from zeep import Client, xsd
@@ -179,13 +188,13 @@ apiKey = '<Your apikey>'
 # Private Teilnetz-ID
 privateSubnetId = '<Your subnet id>'
 
-# Auftragszusatzinformationen
+# Bestellungsdetails
 # Von SoftLayer_Product_Package-API abgerufene Paket-ID
-# (oben angegebenes Beispiel)
+# (Beispiel siehe oben)
 lbaasPackageId = 805
 # Von SoftLayer_Product_Package-API abgerufene Artikelpreis-ID
-# (oben angegebenes Beispiel)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+# (Beispiel siehe oben)
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -217,7 +226,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Erforderlich, da LBaaS ein auf Stundenintervallen basierender Service ist
+    useSystemPublicIpPool=True  # Optional - Standardwert ist "True" für die Zuordnung von öffentlichen
+                                # IPs für die Lastausgleichsfunktion aus einem IBM Systempool,
+                                # andernfalls "False" für die Zuordnung aus dem öffentlichen VLAN
+                                # unter Ihrem Konto
 )
 
 # SLAPI-Aufruf für SoftLayer_Product_Order::placeOrder-API ausführen
@@ -226,13 +240,14 @@ try:
         _soapheaders=[userAuthValue],
         orderData=orderDataValue,
         saveAsQuote=False
-    )
+    )   
 
     print 'Order has been accepted.'
 
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
 ## Beispiel für das Abrufen von Lastausgleichsfunktionen
 ### Alle Lastausgleichsfunktionen auflisten
@@ -260,9 +275,11 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
+{: codeblock}
+
 ### Details einer bestimmten Lastausgleichsfunktion abrufen
 ```
-from zeep import Client, xsd
+from zeep import Client, xsd 
 
 # Benutzername und API-Schlüssel für SLAPI-Aufruf
 username = '<Your username>'
@@ -304,11 +321,12 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
 ## Beispiel für das Aktualisieren einer Lastausgleichsfunktion
 ### Mitglied hinzufügen
 ```
-from zeep import Client, xsd
+from zeep import Client, xsd 
 
 # Benutzername und API-Schlüssel für SLAPI-Aufruf
 username = '<Your username>'
@@ -324,7 +342,7 @@ serverInstances = [
     {
         'privateIpAddress': '10.121.220.142'  #update with the correct IP
         # use default weight
-    }
+    }   
 ]
 
 # WSDL für SoftLayer_Network_LBaaS_Member-API
@@ -359,9 +377,11 @@ result = client.service.addLoadBalancerMembers(
 )
 print result
 ```
+{: codeblock}
+
 ### Protokoll hinzufügen
 ```
-from zeep import Client, xsd
+from zeep import Client, xsd 
 
 # Benutzername und API-Schlüssel für SLAPI-Aufruf
 username = '<Your username>'
@@ -369,7 +389,7 @@ apiKey = '<Your apiKey>'
 # UUID der Lastausgleichsfunktion
 uuid = '<Your load balancer UUID>'
 # Neues Protokoll, das hinzugefügt werden soll
-protocolConfigurations = [
+protocolConfigurations = [ 
     {   
         'frontendProtocol': 'TCP',
         'frontendPort': 90,
@@ -413,6 +433,7 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
 ## Beispiel für das Abbrechen einer Lastausgleichsfunktion
 ### Lastausgleichsfunktion abbrechen
@@ -447,7 +468,7 @@ try:
     result = client.service.cancelLoadBalancer(
         _soapheaders=[userAuthValue],
         uuid=uuid
-    )
+    )   
 
     if True:
         print 'The cancellation request is accepted.'
@@ -455,3 +476,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}

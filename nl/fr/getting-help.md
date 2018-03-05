@@ -16,13 +16,11 @@ lastupdated: "2017-08-21"
 
 # Aide et support
 
-Si vous rencontrez des problèmes ou si vous vous posez des questions lors de l'utilisation du service IBM Bluemix Load Balancer, vous pouvez obtenir de l'aide en recherchant des informations ou en posant des questions sur l'un des forums ci-dessous. Vous pouvez également ouvrir un ticket de demande de service.
+Si vous rencontrez des problèmes ou si vous vous posez des questions lors de l'utilisation du service IBM Cloud Load Balancer, vous pouvez obtenir de l'aide en recherchant des informations ou en posant des questions sur l'un des forums ci-dessous. Vous pouvez également ouvrir un ticket de demande de service.
 
+Lorsque vous posez une question sur un forum, étiquetez votre question de sorte que les équipes de développement d'IBM Cloud puissent la voir.
 
-Si vous utilisez les forums pour poser une question, associez votre question aux étiquettes appropriées de sorte qu'elle soit vue par les équipes de développement Bluemix.
-
-
-* En cas de questions d'ordre technique sur le service IBM Bluemix Load Balancer, postez votre question sur le forum [Stack Overflow](https://stackoverflow.com/search?q=lbaas+ibm-bluemix) en lui adjoignant les balises "lbaas" et "ibm-bluemix".
+* En cas de questions d'ordre technique sur le service d'équilibrage de charge IBM Cloud, postez votre question sur le forum [Stack Overflow](https://stackoverflow.com/search?q=lbaas+ibm-bluemix) en lui adjoignant les balises "lbaas" et "ibm-bluemix".
 * Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks - dW Answers](https://developer.ibm.com/answers/topics/lbaas.html?smartspace=bluemix). Incluez les balises "lbaas" et "bluemix".
 
 Pour plus d'informations sur l'utilisation des forums, voir [Comment obtenir de l'aide](https://console.bluemix.net/docs/support/index.html#getting-help).

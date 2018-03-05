@@ -14,12 +14,12 @@ lastupdated: "2017-08-21"
 {:tip: .tip}
 {:download: .download}
 
-# About
+# Sobre
 
-O serviço IBM Bluemix Load Balancer ajuda os clientes a melhorarem a disponibilidade de seus aplicativos críticos aos negócios, distribuindo o tráfego entre múltiplas instâncias do servidor de aplicativos e encaminhando o tráfego para instâncias funcionais apenas.
+O serviço IBM Cloud Load Balancer ajuda os clientes a melhorarem a disponibilidade de seus aplicativos críticos aos negócios, distribuindo o tráfego entre múltiplas instâncias do servidor de aplicativos e encaminhando o tráfego apenas para instâncias funcionais.
 
 ## Visão geral de recursos
-O serviço IBM Bluemix Load Balancer oferece os recursos a seguir:
+O IBM Cloud Load Balancer Service oferece os recursos a seguir:
 
 * Balanceador de carga público (voltado à Internet)
 	* Serviço publicamente acessível por meio de seu nome completo do domínio

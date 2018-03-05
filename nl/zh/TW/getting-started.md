@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 
 # 開始使用
 
-若要開始使用 IBM Bluemix Load Balancer 服務，請從 Bluemix 型錄中選取**網路 > 負載平衡器 > IBM Bluemix Load Balancer**，然後執行下列程序：
+若要開始使用 IBM Cloud Load Balancer 服務，請從 IBM Cloud 型錄中選取**網路 > 負載平衡器 > IBM Cloud Load Balancer**，然後執行下列程序：
 
 1. 選取資料中心，並檢閱服務方案。按**下一步**。
 2. 選取您要部署負載平衡器的子網路。在此子網路上，負載平衡器服務實例會有它的一個網路介面。請確定應用程式伺服器位在此子網路上或可透過此子網路連接。必要的話，請啟用 VLAN 跨距。按**下一步**。

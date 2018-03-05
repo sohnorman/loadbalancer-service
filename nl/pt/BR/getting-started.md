@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 
 # Introdução
 
-Para iniciar a utilização do serviço IBM Bluemix Load Balancer, selecione **Rede > Balanceadores de carga > IBM Bluemix Load Balancer** no catálogo do Bluemix e, em seguida, execute o procedimento a seguir:
+Para começar a usar o serviço IBM Cloud Load Balancer, selecione **Rede > Balanceadores de carga > IBM Cloud Load Balancer** no catálogo do IBM Cloud, em seguida, execute o procedimento a seguir:
 
 1. Selecione seu data center e revise o plano de serviço. Clique em **Avançar**.
 2. Selecione a sub-rede na qual gostaria de implementar o balanceador de carga. A instância do serviço de balanceador de carga terá uma de suas interfaces de rede nesta sub-rede. Assegure-se de que seus servidores de aplicativos estejam nessa sub-rede ou sejam acessíveis nessa sub-rede. Se necessário, ative a ampliação da VLAN. Clique em **Avançar**.

@@ -16,10 +16,10 @@ lastupdated: "2017-08-21"
 
 # 关于
 
-IBM Bluemix Load Balancer 服务通过在多个应用程序服务器实例之间分配流量，仅将流量转发给运行状况良好的实例，来帮助客户改进其业务关键应用程序的可用性。
+IBM Cloud Load Balancer 服务通过在多个应用程序服务器实例之间分配流量，仅将流量转发给运行状况良好的实例，来帮助客户改进其业务关键应用程序的可用性。
 
 ## 功能概述
-IBM Bluemix Load Balancer 服务提供以下功能：
+IBM Cloud Load Balancer 服务提供以下功能：
 
 * 公用（面向互联网）Load Balancer
 	* 通过其标准域名可公开访问的服务

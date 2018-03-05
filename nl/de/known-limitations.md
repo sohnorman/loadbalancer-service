@@ -15,18 +15,19 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # Bekannte Probleme und Einschränkungen
-Dieser Abschnitt enthält Informationen über die derzeit bekannten Probleme und Einschränkungen beim IBM Bluemix-Service für die Lastausgleichsfunktion. 
+Dieser Abschnitt enthält Informationen über die derzeit bekannten Probleme und Einschränkungen beim IBM Cloud Load Balancer-Service.
 
 ## Bekannte Probleme
-Der IBM Bluemix-Service für die Lastausgleichsfunktion weist derzeit die folgenden Probleme auf: 
+Der IBM Cloud Load Balancer-Service weist derzeit die folgenden Probleme auf:
 
-* Geringfügig - Die Schaltfläche **Bearbeiten** in den Registerkarten für Serverinstanzen und Protokolle wird auf alle Einträge angewendet und nicht auf die Zeilen beschränkt, die mit einem Kontrollkästchen ausgewählt wurden.  
-* Geringfügig - Während der erstmaligen Erstellung des Service für die Lastausgleichsfunktion gehen die angepassten Einstellungen für die Statusprüfung verloren, wenn Sie zwischen verschiedenen Ansichten zurück- und wieder vorspringen. 
-* Geringfügig - Es können Probleme auftreten, wenn die Browser Internet Explorer 11, Edge oder Safari zum Verwalten des Service für die Lastausgleichsfunktion verwendet werden. Verwenden Sie alternativ die Browser Firefox oder Chrome.  
-* Auf die Darstellung begrenzt - Während der ersten Serviceerstellung kann die Dropdown-Liste für die Rechenzentren verzerrt dargestellt werden. Unabhängig davon können Sie jedoch das gewünschte Rechenzentrum auswählen. 
+* Geringfügig - Die Schaltfläche **Bearbeiten** in den Registerkarten für Serverinstanzen und Protokolle wird auf alle Einträge angewendet und nicht auf die Zeilen beschränkt, die mit einem Kontrollkästchen ausgewählt wurden. 
+* Geringfügig - Während der erstmaligen Erstellung des Service für die Lastausgleichsfunktion gehen die angepassten Einstellungen für die Statusprüfung verloren, wenn Sie zwischen verschiedenen Ansichten zurück- und wieder vorspringen.
+* Geringfügig - Es können Probleme auftreten, wenn die Browser Internet Explorer 11, Edge oder Safari zum Verwalten des Service für die Lastausgleichsfunktion verwendet werden. Verwenden Sie alternativ die Browser Firefox oder Chrome. 
+* Auf die Darstellung begrenzt - Während der ersten Serviceerstellung kann die Dropdown-Liste für die Rechenzentren verzerrt dargestellt werden. Unabhängig davon können Sie jedoch das gewünschte Rechenzentrum auswählen.
+* Auf die Darstellung begrenzt - Die Preisinformationen auf der Überprüfungsseite sind auf zwei Dezimalstellen gerundet. Die korrekten Preise finden Sie in den Preisstrukturinformationen auf der Planseite.
 
 ## Bekannte Einschränkungen
-Der IBM Bluemix-Service für die Lastausgleichsfunktion weist derzeit die folgenden Einschränkungen auf: 
+Der IBM Cloud Load Balancer-Service weist derzeit die folgenden Einschränkungen auf: 
 
 * Maximale Anzahl an virtuellen Ports bzw. Protokollen: 10
 * Maximale Anzahl der Server hinter der Lastausgleichsfunktion: 50

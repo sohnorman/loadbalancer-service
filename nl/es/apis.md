@@ -14,46 +14,40 @@ lastupdated: "2017-08-21"
 {:tip: .tip}
 {:download: .download}
 
-# Riferimento API
-L'API (Application Programming Interface) di SoftLayer® è un'interfaccia di sviluppo che fornisce agli sviluppatori e agli amministratori di sistema
-interazione diretta con il sistema di backend di SoftLayer. 
+# Referencia de API
+La API de SoftLayer® es la interfaz de desarrollo que permite a los desarrolladores y administradores del sistema interactuar directamente con el sistema de fondo de SoftLayer. 
 {:shortdesc}
 
-La SLAPI (SoftLayer API) rafforza molte delle funzioni nel portale clienti, il che normalmente
-significa che se è possibile un'interazione nel portale clienti, può essere eseguita anche nell'API. Poiché puoi programmaticamente interagire
-con tutte le parti dell'ambiente SoftLayer nell'API, puoi utilizzarla per le attività automatiche.
+La API de SoftLayer (SLAPI) ofrece muchas de las características del Portal de cliente, lo cual significa que normalmente si una interacción es posible en Portal de cliente, también lo es en la API. Puesto que se puede interactuar mediante programación con todos los componentes del entorno de SoftLayer dentro de la API, es posible utilizar la API para automatizar tareas.
 
-L'API SoftLayer è un sistema di chiamata di procedura remota. Ogni chiamata implica l'invio di dati verso un endpoint dell'API e la
-ricezione dei dati strutturati come ritorno. Il formato utilizzato per inviare e ricevere i dati con la SLAPI dipende
-da quale implementazione dell'API scegli. La SLAPI al momento utilizza SOAP, XML-RPC o REST per la trasmissione dei dati. 
+La API SoftLayer es un sistema de llamada a procedimiento remoto. Cada llamada implica el envío de datos a un punto final de API a cambio de la recepción de datos estructurados. El formato utilizado para enviar y recibir datos con la SLAPI depende de qué implementación de la API utilice. Actualmente la SLAPI utiliza SOAP, XML-RPC o REST para la transmisión de datos. 
 
-Per ulteriori informazioni sull'API SoftLayer, sulle API del servizio IBM Bluemix Load Balancer, consulta le seguenti risorse
-nella rete di sviluppo SoftLayer:
-* [SoftLayer API Overview ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
-* [Getting Started with the SoftLayer API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/article/getting-started){: new_window}
-* [SoftLayer_Product_Package API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
-* [SoftLayer_Network_LBaaS_LoadBalancer API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_LoadBalancer){: new_window}
-* [SoftLayer_Network_LBaaS_Listener API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Listener){: new_window}
-* [SoftLayer_Network_LBaaS_Member API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
-* [SoftLayer_Network_LBaaS_HealthMonitor API ![Icona link esterno](../../icons/launch-glyph.svg "Icona link esterno")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
+Para obtener más información sobre la API SoftLayer, las API del servicio IBM Cloud Load Balancer, consulte los siguientes recursos en la red de despliegue de SoftLayer:
+* [Visión general de la API de SoftLayer ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
+* [Iniciación a la API de SoftLayer ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/article/getting-started){: new_window}
+* [SoftLayer_Product_Package API ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
+* [SoftLayer_Network_LBaaS_LoadBalancer API ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_LoadBalancer){: new_window}
+* [SoftLayer_Network_LBaaS_Listener API ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Listener){: new_window}
+* [SoftLayer_Network_LBaaS_Member API ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
+* [SoftLayer_Network_LBaaS_HealthMonitor API ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
 
-I seguenti esempi utilizzano Python con il client SOAP zeep.
+Los siguientes ejemplos utilizan Python con el cliente zeep SOAP.
 
-## Esempio di creazione del programma di bilanciamento del carico
-### Richiama l'ID del pacchetto del prodotto e il prezzo elemento
+## Ejemplo de creación de equilibrador de carga
+### Recuperación del ID de paquete de producto y del precio del artículo
 ```
 from zeep import Client, xsd
 import sys
 
-# Nome utente e chiave api per la chiamata SLAPI
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
 
-# WSDL per l'API SoftLayer_Product_Package
+# WSDL for SoftLayer_Product_Package API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Product_Package?wsdl'
 client = Client(wsdl)
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -62,7 +56,7 @@ xsdUserAuth = xsd.Element(
     ])
 )
 
-# XSD per objectMask
+# XSD for objectMask
 xsdObjectMask = xsd.Element(
     '{http://api.service.softlayer.com/soap/v3/}SoftLayer_ObjectMask',
     xsd.ComplexType([
@@ -70,7 +64,7 @@ xsdObjectMask = xsd.Element(
     ])
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 
 lbaasPackage = None
@@ -106,27 +100,29 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
-### Verifica l'ordine del programma di bilanciamento del carico
-```
-from zeep import Client, xsd 
-from zeep.exceptions import Fault
+{: codeblock}
 
-# Nome utente e chiave api per la chiamata SLAPI
+### Verificación del orden del equilibrador de carga
+```
+desde el cliente zeep import, xsd
+desde zeep.exceptions import Fault
+
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
-# ID sottorete privata
+# Private subnet id
 privateSubnetId = '<Your subnet id>'
 
-# Dettagli ordine
-# ID pacchetto richiamato dall'API SoftLayer_Product_Package
-# (esempio fornito di seguito)
+# Order details
+# Package id retrieved from SoftLayer_Product_Package API
+# (example provided above)
 lbaasPackageId = 805
-# ID prezzo elemento dall'API SoftLayer_Product_Package
-# (esempio fornito di seguito)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+# ItemPrice id retrieved from SoftLayer_Product_Package API
+# (example provided above)
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -138,14 +134,14 @@ protocolConfigurations = [{
     'maxConn':1000
 }]
 
-# WSDL per l'API SoftLayer_Product_Order
+# WSDL for SoftLayer_Product_Order API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Product_Order?wsdl'
 client = Client(wsdl)
 orderDataType = client.get_type(
     'ns0:SoftLayer_Container_Product_Order_Network_LoadBalancer_AsAService'
 )
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -154,14 +150,19 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
-# Effettua la chiamata SLAPI all'API SoftLayer_Product_Order::verifyOrder
+# Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
 try:
     result = client.service.verifyOrder(
         _soapheaders=[userAuthValue],
@@ -173,24 +174,26 @@ try:
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
-### Inserisci l'ordine del programma di bilanciamento del carico
-```
-from zeep import Client, xsd 
-from zeep.exceptions import Fault
+{: codeblock}
 
-# Nome utente e chiave api per la chiamata SLAPI
+### Colocación del orden del equilibrador de carga
+```
+desde el cliente zeep import, xsd
+desde zeep.exceptions import Fault
+
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apikey>'
-# ID sottorete privata
+# Private subnet id
 privateSubnetId = '<Your subnet id>'
 
-# Dettagli ordine
-# ID pacchetto richiamato dall'API SoftLayer_Product_Package
-# (esempio fornito di seguito)
-lbaasPackageId = 805
-# ID prezzo elemento dall'API SoftLayer_Product_Package
-# (esempio fornito di seguito)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+# Order details
+# Package id retrieved from SoftLayer_Product_Package API
+# (example provided above)
+lbaasPackageId = 805 
+# ItemPrice id retrieved from SoftLayer_Product_Package API
+# (example provided above)
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -202,14 +205,14 @@ protocolConfigurations = [{
     'maxConn':1000
 }]
 
-# WSDL per l'API SoftLayer_Product_Order
+# WSDL for SoftLayer_Product_Order API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Product_Order?wsdl'
 client = Client(wsdl)
 orderDataType = client.get_type(
     'ns0:SoftLayer_Container_Product_Order_Network_LoadBalancer_AsAService'
 )
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -218,14 +221,19 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
-# Effettua la chiamata SLAPI all'API SoftLayer_Product_Order::placeOrder
+# Make SLAPI call to SoftLayer_Product_Order::placeOrder API
 try:
     result = client.service.placeOrder(
         _soapheaders=[userAuthValue],
@@ -238,24 +246,25 @@ try:
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
-## Esempio di acquisizione del programma di bilanciamento del carico
-### Elenca tutti i programmi di bilanciamento del carico
+## Ejemplo de obtención de equilibradores de carga
+### Lista de todos los equilibradores de carga
 ```
-from zeep import Client
+desde el cliente zeep import
 
-# Nome utente e chiave api per la chiamata SLAPI
+# Username and apikey SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
 
-# WSDL per l'API SoftLayer_Network_LBaaS_LoadBalancer
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
 wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
 client = Client(wsdl)
 
-# Prepara autenticazione per l'intestazione SOAP
+# Prepare auth for SOAP header
 userauth = {'authenticate': {'username': username, 'apiKey': apiKey}}
 
-# Richiama tutti gli oggetti del programma di bilanciamento del carico
+# Retrieve all load balancer objects
 result = client.service.getAllObjects(_soapheaders=userauth)
 loadbalancers = result['body']['getAllObjectsReturn']
 for loadbalancer in loadbalancers:
@@ -265,21 +274,23 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
-### Richiama i dettagli di un programma di bilanciamento del carico specifico
-```
-from zeep import Client, xsd 
+{: codeblock}
 
-# Nome utente e chiave api per la chiamata SLAPI
+### Recuperación de detalles de un equilibrador de carga específico
+```
+desde el cliente zeep import, xsd 
+
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
-# UUID del programma di bilanciamento del carico
+# UUID of the load balancer
 uuid = '<Your load balancer uuid>'
 
-# WSDL per l'API SoftLayer_Network_LBaaS_LoadBalancer
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
 client = Client(wsdl)
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -288,7 +299,7 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# XSD per objectMask
+# XSD for objectMask
 xsdObjectMask = xsd.Element(
     '{http://api.service.softlayer.com/soap/v3/}SoftLayer_ObjectMask',
     xsd.ComplexType([
@@ -296,11 +307,11 @@ xsdObjectMask = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 objectMaskValue = xsdObjectMask(mask='mask[listeners, healthMonitors]')
 
-# Richiama un oggetto del programma di bilanciamento del carico specifico (con objectMask per richiamare "listeners")
+# Retrieve a specific load balancer object (with objectMask to retrieve "listeners")
 loadbalancer = client.service.getLoadBalancer(_soapheaders=[userAuthValue,objectMaskValue], uuid=uuid)
 print 'Name: %s' % loadbalancer.name
 print 'Address: %s' % loadbalancer.address
@@ -309,34 +320,35 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
-## Esempio di aggiornamento di un programma di bilanciamento del carico
-### Aggiungi un membro
+## Ejemplo de actualización de equilibrador de carga
+### Adición de un miembro
 ```
-from zeep import Client, xsd 
+desde el cliente zeep import, xsd 
 
-# Nome utente e chiave api per la chiamata SLAPI
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apikey>'
-# UUID del programma di bilanciamento del carico da aggiornare
+# UUID of load balancer to be updated
 uuid = '<Your load balancer uuid>'
-# Server di backend da aggiungere
-serverInstances = [
+# Backend servers to be added
+serverInstances = [ 
     {
-        'privateIpAddress': '10.121.220.141', #aggiorna con l'IP corretto
+        'privateIpAddress': '10.121.220.141', #update with the correct IP
         'weight': 80 #weight is only applicable to Weight Round Robin listeners
-    },
+    },  
     {
-        'privateIpAddress': '10.121.220.142'  #aggiorna con l'IP corretto
-        # utilizza peso predefinito
+        'privateIpAddress': '10.121.220.142'  #update with the correct IP
+        # use default weight
     }   
 ]
 
-# WSDL per l'API SoftLayer_Network_LBaaS_Member
+# WSDL for SoftLayer_Network_LBaaS_Member API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Network_LBaaS_Member?wsdl'
 client = Client(wsdl)
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -345,7 +357,7 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# XSD per objectMask
+# XSD for objectMask
 xsdObjectMask = xsd.Element(
     '{http://api.service.softlayer.com/soap/v3/}SoftLayer_ObjectMask',
     xsd.ComplexType([
@@ -353,27 +365,29 @@ xsdObjectMask = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 objectMaskValue = xsdObjectMask(mask='mask[members]')
 
-# Effettua la chiamata SLAPI all'API SoftLayer_Network_LBaaS_Member::addLoadBalancerMember
+# Make SLAPI call to SoftLayer_Network_LBaaS_Member::addLoadBalancerMember API
 result = client.service.addLoadBalancerMembers(
     _soapheaders=[userAuthValue, objectMaskValue],
     loadBalancerUuid=uuid, serverInstances=serverInstances
 )
-print result
+imprimir resultado
 ```
-### Aggiungi un protocollo
-```
-from zeep import Client, xsd 
+{: codeblock}
 
-# Nome utente e chiave api per la chiamata SLAPI
+### Adición de un protocolo
+```
+desde el cliente zeep import, xsd 
+
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
-# UUID del programma di bilanciamento del carico
+# UUID of load balancer
 uuid = '<Your load balancer UUID>'
-# Nuovo protocollo da aggiungere
+# New protocol to add
 protocolConfigurations = [ 
     {   
         'frontendProtocol': 'TCP',
@@ -385,11 +399,11 @@ protocolConfigurations = [
     }   
 ]
 
-# WSDL per l'API SoftLayer_Network_LBaaS_Listener
+# WSDL for SoftLayer_Network_LBaaS_Listener API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Network_LBaaS_Listener?wsdl'
 client = Client(wsdl)
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -398,7 +412,7 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# XSD per objectMask
+# XSD for objectMask
 xsdObjectMask = xsd.Element(
     '{http://api.service.softlayer.com/soap/v3/}SoftLayer_ObjectMask',
     xsd.ComplexType([
@@ -406,11 +420,11 @@ xsdObjectMask = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 objectMaskValue = xsdObjectMask(mask='mask[listeners]')
 
-# Effettua la chiamata SLAPI all'API SoftLayer_Network_LBaaS_Listener::updateLoadBalancerProtocols
+# Make SLAPI call to SoftLayer_Network_LBaaS_Listener::updateLoadBalancerProtocols API
 result = client.service.updateLoadBalancerProtocols(
     _soapheaders=[userAuthValue, objectMaskValue],
     loadBalancerUuid=uuid, protocolConfigurations=protocolConfigurations
@@ -418,24 +432,25 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
-## Esempio di annullamento di un programma di bilanciamento del carico
-### Annulla un programma di bilanciamento del carico
+## Ejemplo de cancelación de equilibrador de carga
+### Cancelación de un equilibrador de carga
 ```
-from zeep import Client, xsd 
-from zeep.exceptions import Fault
+desde el cliente zeep import, xsd
+desde zeep.exceptions import Fault
 
-# Nome utente e chiave api per la chiamata SLAPI
+# Username and apikey for SLAPI call
 username = '<Your username>'
 apiKey = '<Your apiKey>'
-# UUID del programma di bilanciamento del carico da annullare
+# UUID of the load balancer to be cancelled
 uuid = '<Your load balancer uuid>'
 
-# WSDL per l'API SoftLayer_Network_LBaaS_LoadBalancer
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
 wsdl = 'https://api.softlayer.com/soap/v3/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
 client = Client(wsdl)
 
-# XSD per l'autenticazione
+# XSD for authentication
 xsdUserAuth = xsd.Element(
     '{http://api.softlayer.com/soap/v3/}authenticate',
     xsd.ComplexType([
@@ -444,10 +459,10 @@ xsdUserAuth = xsd.Element(
     ])  
 )
 
-# Crea oggetti valore XSD
+# Create XSD value objects
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 
-# Effettua la chiamata SLAPI all'API SoftLayer_Network_LBaaS_LoadBalancer::cancelLoadBalancer
+# Make SLAPI call to SoftLayer_Network_LBaaS_LoadBalancer::cancelLoadBalancer API
 try:
     result = client.service.cancelLoadBalancer(
         _soapheaders=[userAuthValue],
@@ -460,3 +475,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}

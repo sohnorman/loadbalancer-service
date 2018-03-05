@@ -17,7 +17,7 @@ lastupdated: "2017-08-21"
 
 # Guide d'initiation
 
-Pour vous familiariser avec le service IBM Bluemix Load Balancer, sélectionnez **Réseau > Equilibreurs de charge > IBM Bluemix Load Balancer** dans le catalogue Bluemix, puis procédez comme suit :
+Pour vous familiariser avec le service IBM Cloud Load Balancer, sélectionnez **Réseau > Equilibreurs de charge > IBM Cloud Load Balancer** dans le catalogue IBM, puis procédez comme suit :
 
 1. Sélectionnez votre centre de données et examinez le plan de service. Cliquez sur **Suivant**.
 2. Sélectionnez le sous-réseau sur lequel déployer votre équilibreur de charge. L'une des interfaces réseau de votre instance de service d'équilibrage de charge se trouvera sur ce sous-réseau. Assurez-vous que vos serveurs d'applications sont installés sur ce sous-réseau et sont accessibles à partir de celui-ci. Si nécessaire, activez la superposition VLAN. Cliquez sur **Suivant**.

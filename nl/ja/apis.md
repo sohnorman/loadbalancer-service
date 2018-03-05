@@ -15,14 +15,14 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # API リファレンス
-SoftLayer® アプリケーション・プログラミング・インターフェース (API) は、開発者やシステム管理者が SoftLayer のバックエンド・システムを直接操作できるようにする開発用インターフェースです。
+SoftLayer® アプリケーション・プログラミング・インターフェース (API) は、開発者やシステム管理者が SoftLayer のバックエンド・システムを直接操作できるようにする開発用インターフェースです。 
 {:shortdesc}
 
-SoftLayer API (SLAPI) により、カスタマー・ポータルの多くの機能が使用可能になります。つまり、通常、カスタマー・ポータルでの操作が可能であれば、API でも実行することができます。API 内で SoftLayer 環境のすべての部分をプログラマチックに操作できるので、API を使用してタスクを自動化することができます。
+SoftLayer API (SLAPI) により、カスタマー・ポータルの多くの機能が使用可能になります。つまり、通常、カスタマー・ポータルでの操作が可能であれば、API でも実行することができます。 API 内で SoftLayer 環境のすべての部分をプログラマチックに操作できるので、API を使用してタスクを自動化することができます。
 
-SoftLayer API はリモート・プロシージャー・コール・システムです。各呼び出しでは、API エンドポイントにデータが送信され、それに対して構造化データを受信します。SLAPI を使用したデータの送受信に使用される形式は、選択した API の実装方法によって異なります。SLAPI は現在、データ伝送に SOAP、XML-RPC、または REST を使用しています。 
+SoftLayer API はリモート・プロシージャー・コール・システムです。 各呼び出しでは、API エンドポイントにデータが送信され、それに対して構造化データを受信します。 SLAPI を使用したデータの送受信に使用される形式は、選択した API の実装方法によって異なります。 SLAPI は現在、データ伝送に SOAP、XML-RPC、または REST を使用しています。 
 
-SoftLayer API、IBM Bluemix Load Balancer サービス API については、SoftLayer Development Network にある以下の資料を参照してください。
+SoftLayer API、IBM Cloud Load Balancer サービス API については、SoftLayer Development Network にある以下の資料を参照してください。
 * [SoftLayer API Overview ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
 * [Getting Started with the SoftLayer API ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](http://sldn.softlayer.com/article/getting-started){: new_window}
 * [SoftLayer_Product_Package API ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](http://sldn.softlayer.com/reference/services/SoftLayer_Product_Package){: new_window}
@@ -100,9 +100,11 @@ objectMaskValue = xsdObjectMask(mask='mask[id;item.description]')
 result = client.service.getItemPrices(_soapheaders=[userAuthValue,objectInitParValue,objectMaskValue])
 itemPrices = result['body']['getItemPricesReturn']
 for itemPrice in itemPrices:
-    print 'Item Price Id: %s' % itemPrice.id
-    print 'Item Description: %s\r\n' % itemPrice.item.description
+    if itemPrice.locationGroupId is None:
+        print 'Item Price Id: %s' % itemPrice.id
 ```
+{: codeblock}
+
 ### ロード・バランサーの注文の確認
 ```
 from zeep import Client, xsd 
@@ -120,7 +122,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -152,7 +154,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -167,6 +174,8 @@ try:
 except Fault as exp:
     print 'The order is INVALID!\r\n>>> %s' % exp
 ```
+{: codeblock}
+
 ### ロード・バランサーの注文を出す
 ```
 from zeep import Client, xsd 
@@ -184,7 +193,7 @@ privateSubnetId = '<Your subnet id>'
 lbaasPackageId = 805 
 # ItemPrice id retrieved from SoftLayer_Product_Package API
 # (example provided above)
-lbaasItemPrices = [{'id':199445}, {'id':199455}, {'id':199465}, {'id':205837}]
+lbaasItemPrices = [{'id':199447}, {'id':199467}, {'id':205839}, {'id':205907}]
 name = 'MyLoadBalancer'
 subnets = [{'id': privateSubnetId}]
 protocolConfigurations = [{
@@ -216,7 +225,12 @@ xsdUserAuth = xsd.Element(
 userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
-    subnets=subnets, protocolConfigurations=protocolConfigurations
+    subnets=subnets, protocolConfigurations=protocolConfigurations,
+    useHourlyPricing=True,      # Required since LBaaS is an hourly service
+    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
+                                # balancer public IPs from an IBM system pool,
+                                # otherwise "False" from the public VLAN
+                                # under your account
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -232,6 +246,7 @@ try:
 except Fault as exp:
     print 'Place order failed:\r\n>>> %s' % exp
 ```
+{: codeblock}
 
 ## ロード・バランサーの取得例
 ### すべてのロード・バランサーのリスト
@@ -259,6 +274,8 @@ for loadbalancer in loadbalancers:
     print 'OperatingStatus: %s' % loadbalancer.operatingStatus
     print 'ProvisioningStatus: %s\r\n' % loadbalancer.provisioningStatus
 ```
+{: codeblock}
+
 ### 特定のロード・バランサーの詳細の取得
 ```
 from zeep import Client, xsd 
@@ -303,6 +320,7 @@ print 'ProvisioningStatus: %s' % loadbalancer.provisioningStatus
 print 'Listeners: %s' % loadbalancer.listeners
 print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
+{: codeblock}
 
 ## ロード・バランサーの更新例
 ### メンバーの追加
@@ -358,6 +376,8 @@ result = client.service.addLoadBalancerMembers(
 )
 print result
 ```
+{: codeblock}
+
 ### プロトコルの追加
 ```
 from zeep import Client, xsd 
@@ -412,6 +432,7 @@ result = client.service.updateLoadBalancerProtocols(
 listeners = result['listeners']
 print listeners
 ```
+{: codeblock}
 
 ## ロード・バランサーのキャンセル例
 ### ロード・バランサーのキャンセル
@@ -454,3 +475,4 @@ try:
 except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
+{: codeblock}
