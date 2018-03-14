@@ -16,6 +16,7 @@ IBM Cloud Load Balancer Service
     health-checks.md
     ssl-offload.md
     advanced-traffic.md
+    monitoring-metrics.md
     {: .navgroup-end}
     
     {: .navgroup id="reference"}

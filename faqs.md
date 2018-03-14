@@ -16,7 +16,7 @@ lastupdated: "2017-11-02"
 
 # FAQs
 
-This section contains answers to some frequently asked questions about IBM Cloud Load Balancer Service.
+This section contains answers to some frequently asked questions about the IBM Cloud Load Balancer Service.
 
 ## How many load balancing options are available in {{site.data.keyword.BluSoftlayer_notm}}?
 
@@ -34,10 +34,6 @@ While trying to create a new load balancer service, you may define up to two vir
 
 50.
 
-## Can I create an internal-only, private load balancer that can only be accessed by internal clients?  
-
-Not at this time. The service hosted on the IBM Cloud load balancer will be assigned a fully qualified domain name accessible from the public Internet. 
-
 ## What are the default settings and allowed values for various health check parameters?
 
 The default settings and allowed values are listed below:
@@ -46,46 +42,34 @@ The default settings and allowed values are listed below:
 * **Health check response timeout:** Default is 2 seconds, range is 1 – 59 seconds
 * **Max Retrials:** Default is 2 retrials, range is 1 to 10 retrials
 
-**Note:** The health check response timeout value must always be less than the health check interval value. 
+**NOTE:** The health check response timeout value must always be less than the health check interval value. 
 
 ## Can I use compute instances residing in remote data centers with this service? 
 
-It is recommended that your load balancer service and your compute instances reside locally within the same data center. The load balancer service’s graphical interface (GUI) will not show compute instances from other remote data centers. However, the GUI will include compute instances from other data centers within same city (for example, data centers whose names share the first three letters, such as DALxx. You may use the API interface to add compute instances from any remote data center though. 
+We recommend that your load balancer service and your compute instances reside locally within the same data center. The load balancer service’s graphical interface (GUI) will not show compute instances from other remote data centers. However, the GUI will include compute instances from other data centers within the same city (for example, data centers whose names share the first three letters, such as DALxx). You may use the API interface to add compute instances from any remote data center, though. 
 
-## Which TLS version is supported with SSL offload? Which ciphers are supported?
+## Which TLS version is supported with SSL offload?
 
 The Cloud Load Balancer Service supports TLS 1.2 with SSL termination. 
 
-The following list details the supported ciphers (listed in order of precedence):  
-
-* ECDHE-RSA-AES256-GCM-SHA384 
-* ECDHE-RSA-AES256-SHA384 
-* DHE-RSA-AES256-GCM-SHA384 
-* DHE-RSA-AES256-SHA256 
-* AES256-GCM-SHA384 
-* AES256-SHA256 
-* ECDHE-RSA-AES128-GCM-SHA256 
-* ECDHE-RSA-AES128-SHA256 
-* DHE-RSA-AES128-GCM-SHA256 
-* DHE-RSA-AES128-SHA256 
-* AES128-GCM-SHA256 
-* AES128-SHA256 
-
 ## Can I customize my SSL cipher list?
 
-Not at this time.
+Yes, you can. Please check [ssl-offload ](ssl-offload.html)
 
 ## What is the maximum number of Load Balancer service instances I can create within my account? 
 
-Currently, you may create up to 20 service instances. If you need more instances, then please contact IBM Support. 
+Currently, you may create up to 20 service instances. If you need more instances, please contact IBM Support. 
 
-## Can the Load Balancer as a Service be used with VMWare? 
+## Can the IBM Cloud Load Balancer Service be used with VMWare? 
 
-VMware virtual machines assigned SoftLayer portable private addresses can be specified as backend servers to the load balancer. This feature is currently available only via the API, and not the web UI (GUI). Portable private IPs added via the API appear as "Unknown" in the GUI, as they are not assigned by SoftLayer. Note that this kind of configuration can be used with other Hypervisors such as Xen and KVM as well.
+VMWare virtual machines that are assigned SoftLayer portable private addresses can be specified as backend servers to the load balancer. This feature is currently available only using the API, and not the web UI (GUI). Portable private IPs added using the API appear as "Unknown" in the GUI, as they are not assigned by SoftLayer. Note that this kind of configuration can be used with other Hypervisors such as Xen and KVM as well.
 
-VMware virtual machines assigned non-SoftLayer addresses (such as with VMware NSX networks) cannot be added directly as backend servers to the load balancer. However, depending on your configuration, it may be possible to configure an intermediary such as an NSX gateway that has a SoftLayer private address as the backend server to the load balancer (with the actual servers being VMs attached to network(s) managed by VMware NSX).
+VMWare virtual machines assigned non-SoftLayer addresses (such as VMWare NSX networks) cannot be added directly as backend servers to the load balancer. However, depending on your configuration, it may be possible to configure an intermediary, such as an NSX gateway, that has a SoftLayer private address as the backend server to the load balancer (with the actual servers being VMs attached to network(s) managed by VMware NSX).
 
 ## If I choose to use a public VLAN under my account to deploy my load balancer and I have a firewall deployed on my public VLAN, what configurations are required on my firewall to work with my load balancer service?
 
-TCP port 56501 is used for management. Please ensure that traffic to this port as well as your application's ports are not blocked by your firewall, otherwise load balancer provisioning will fail.
+TCP port 56501 is used for management. Please ensure that traffic to this port, as well as your application's ports, are not blocked by your firewall, otherwise load balancer provisioning will fail.
 
+## What do I need to do when I get an error "This SoftLayer account is not linked to any Bluemix account"?
+
+Ensure that your SoftLayer account is linked with your Bluemix account. Refer to [Softlayer Link](https://console.bluemix.net/docs/account/softlayerlink.html#switching-to-ibmid) for further instructions.
