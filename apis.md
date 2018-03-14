@@ -577,4 +577,3 @@ for timeSeriesDataValue in timeSeriesDataValues:
     print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
     print 'Value: %f' % timeSeriesDataValue.value
 ```
-{: codeblock}
