@@ -52,10 +52,6 @@ We recommend that your load balancer service and your compute instances reside l
 
 The Cloud Load Balancer Service supports TLS 1.2 with SSL termination. 
 
-## Can I customize my SSL cipher list?
-
-Yes, you can. Please check [ssl-offload ](ssl-offload.html)
-
 ## What is the maximum number of Load Balancer service instances I can create within my account? 
 
 Currently, you may create up to 20 service instances. If you need more instances, please contact IBM Support. 
