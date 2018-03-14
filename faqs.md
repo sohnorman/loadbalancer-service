@@ -63,10 +63,6 @@ The following list details the supported ciphers (listed in order of precedence)
 * AES128-GCM-SHA256
 * AES128-SHA256
 
-## Can I customize my SSL cipher list?
-
-Yes, you can. Please check [ssl-offload ](ssl-offload.html)
-
 ## What is the maximum number of Load Balancer service instances I can create within my account? 
 
 Currently, you may create up to 20 service instances. If you need more instances, please contact IBM Support. 
