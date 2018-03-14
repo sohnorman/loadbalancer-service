@@ -52,6 +52,17 @@ We recommend that your load balancer service and your compute instances reside l
 
 The Cloud Load Balancer Service supports TLS 1.2 with SSL termination. 
 
+The following list details the supported ciphers (listed in order of precedence):  
+
+* ECDHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-AES256-SHA384
+* AES256-GCM-SHA384
+* AES256-SHA256
+* ECDHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES128-SHA256
+* AES128-GCM-SHA256
+* AES128-SHA256
+
 ## Can I customize my SSL cipher list?
 
 Yes, you can. Please check [ssl-offload ](ssl-offload.html)
