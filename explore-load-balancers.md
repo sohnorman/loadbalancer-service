@@ -24,7 +24,7 @@ Scroll to the right to view the rest of the table!
 |        | [IBM Cloud Load Balancer](https://console.bluemix.net/docs/infrastructure/loadbalancer-service/getting-started.html#getting-started)| [Local Load Balancer](https://console.bluemix.net/docs/infrastructure/local-load-balancer/getting-started.html#getting-started) (Shared)| [Local Load Balancer](https://console.stage1.bluemix.net/docs/infrastructure/local-load-balancer/getting-started.html#getting-started) (Dedicated)| [Citrix NetScaler](https://console.bluemix.net/docs/infrastructure/citrix-netscaler-vpx/getting-started.html#getting-started-with-citrix-netscaler) VPX/MPX (Standard)| [Citrix NetScaler](https://console.bluemix.net/docs/infrastructure/citrix-netscaler-vpx/getting-started.html#getting-started-with-citrix-netscaler) VPX/MPX (Platinum) |
 |------- | :------: | :------: | :------: | :------: | :------: |
 |**Public VIP**|Yes|Yes|Yes|Yes|Yes |
-|**Private VIP**|No|No|Yes|Yes|Yes |
+|**Private VIP**|Yes|No|Yes|Yes|Yes |
 |**Layer 4 LB**|Yes|Yes|Yes|Yes|Yes |
 |**Layer 7 LB**|No|Cookie Persistence|Cookie Persistence|Yes|Yes |
 |**Health Checks**|Yes|Yes|Yes|Yes|Yes |
