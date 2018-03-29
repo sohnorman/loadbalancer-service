@@ -40,7 +40,7 @@ The default settings and allowed values are listed below:
 
 * **Health check interval:** Default is 5 seconds, range is 2 – 60 seconds
 * **Health check response timeout:** Default is 2 seconds, range is 1 – 59 seconds
-* **Max retry attempts:** Default is 2 retry attempts, range is 1 to 10 retry attempts
+* **Max retry attempts:** Default is 2 retry attempts, and the range is 1 to 10 retrys
 
 **NOTE:** The health check response timeout value must always be less than the health check interval value. 
 
