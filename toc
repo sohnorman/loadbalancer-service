@@ -8,6 +8,7 @@ IBM Cloud Load Balancer Service
     getting-started.md
     about.md
     explore-load-balancers.md
+    pricing.md
     naas-overview.md
     {: .navgroup-end}
 

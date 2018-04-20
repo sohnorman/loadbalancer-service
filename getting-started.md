@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2018-03-14"
+lastupdated: "2018-04-13"
 
 ---
 
@@ -16,8 +16,18 @@ lastupdated: "2018-03-14"
 
 
 # Getting Started
+To get started using the IBM Cloud Load Balancer, you’ll need two main items:
 
-To get started with the IBM Cloud Load Balancer service, select **Network > Load Balancers > IBM Cloud Load Balancer** from the IBM Cloud catalog, then perform the following procedure:
+* An account with IBM: [IBMid](https://www.ibm.com/account/us-en/signup/register.html)
+* A IBM server, either [Bare Metal](https://console.bluemix.net/docs/bare-metal/about.html#getting-started-with-bare-metal-servers) or [Virtual Server Instance (VSI)](https://console.bluemix.net/docs/vsi/vsi_index.html#getting-started-with-virtual-servers)
+ 
+If you need assistance in obtaining an **IBMid** account, contact your [IBM sales representative](https://www.ibm.com/cloud-computing/bluemix/contact-us) for additional guidance.
+
+If you have an existing IBM Cloud Infrastructure (SoftLayer) account, you can [link your account](https://console.bluemix.net/docs/account/softlayerlink.html#unifyingaccounts) with your IBMid. 
+
+## Ordering a Load Balancer
+
+To order an IBM Cloud Load Balancer service, select **Network > Load Balancers > IBM Cloud Load Balancer** from the [IBM Cloud catalog](https://console.bluemix.net/catalog/infrastructure/load-balancer-group). Log in or create a new account, then perform the following procedure:
 
 1. Select your data center and review the service plan. Click **Next**.
 2. Select the subnet to which you'd like to deploy your load balancer. Your load balancer service instance will have one of its network interfaces on this subnet. Ensure that your application servers are either on this subnet or reachable from this subnet. If necessary, enable VLAN spanning. Click **Next**.
