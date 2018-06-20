@@ -19,10 +19,21 @@ IBM Cloud Load Balancer Service
     ssl-offload.md
     advanced-traffic.md
     monitoring-metrics.md
+
+    {: .topicgroup}
+    Step-by-step: Improving application reliability and scalability with Global Load Balancing
+        application-reliability.md
+        create-cis.md
+        input-domain.md
+        begin-config.md
+        identify-app-resources.md
+        define-global-lb.md
+
     {: .navgroup-end}
     
     {: .navgroup id="reference"}
     apis.md
+    external-resources.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
