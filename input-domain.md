@@ -16,7 +16,8 @@ lastupdated: "2018-06-20"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 
-# Input information about your domain 
+# Input information about your domain
+
 Input information about the domain you wish to protect and provide global load balancing for.
 
 1. Click **Overview** on the left side of the Getting Started screen. Input your Domain Name (or Sub-domain Name) and click **Add domain**. 
