@@ -16,7 +16,7 @@ lastupdated: "2018-06-20"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 
-# Begin Global Load Balancer configuration  
+# Begin Global Load Balancer configuration
 Start configuring your Global Load Balancer.
 
 1. Under the **Reliability** section, select **Global Load Balancer**. 
