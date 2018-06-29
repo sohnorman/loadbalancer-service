@@ -17,6 +17,7 @@ lastupdated: "2018-06-20"
 {:table: .aria-labeledby="caption"}
 
 # Define the global load balancer
+
 Define your global load balancer configuration by specifying a hostname, adding and adjusting your origin pools and defining additional rules to control how traffic is served to clients.
 
 1. Create your Global load balancer by clicking Create load balancer button on right.  
