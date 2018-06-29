@@ -17,6 +17,7 @@ lastupdated: "2018-06-20"
 {:table: .aria-labeledby="caption"}
 
 # Create your IBM Cloud Internet Services (CIS) instance
+
 To create a CIS instance, perform the following procedure:
 
 1. From your browser, open the [Customer Portal ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/){: new_window} and log into your account. 
