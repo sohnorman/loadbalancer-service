@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-04-13"
 
 ---
 
@@ -16,8 +16,18 @@ lastupdated: "2017-08-21"
 
 
 # 概説
+IBM Cloud Load Balancer の使用を開始するには、主に次の 2 つの項目が必要です。
 
-IBM Cloud Load Balancer サービスを開始するには、IBM Cloud カタログから**「ネットワーク」>「ロード・バランサー」>「IBM Cloud Load Balancer」**を選択し、以下の手順を実行します。
+* IBM のアカウント: [IBMid](https://www.ibm.com/account/us-en/signup/register.html)
+* IBM サーバー ([ベア・メタル](https://console.bluemix.net/docs/bare-metal/about.html#getting-started-with-bare-metal-servers)または[仮想サーバー・インスタンス (VSI)](https://console.bluemix.net/docs/vsi/vsi_index.html#getting-started-with-virtual-servers))
+ 
+**IBMid** アカウントの取得について支援が必要な場合は、[IBM 営業担当員](https://www.ibm.com/cloud-computing/bluemix/contact-us)にお問い合わせください。
+
+既存の IBM Cloud Infrastructure (SoftLayer) アカウントがある場合は、IBMid と[アカウントをリンク](https://console.bluemix.net/docs/account/softlayerlink.html#unifyingaccounts)することができます。 
+
+## ロード・バランサーを注文する
+
+IBM Cloud Load Balancer サービスを注文するには、[IBM Cloud カタログ](https://console.bluemix.net/catalog/infrastructure/load-balancer-group)から**「ネットワーク」>「ロード・バランサー」>「IBM Cloud Load Balancer」**を選択します。ログインするか新規アカウントを作成してから、以下の手順を実行してください。
 
 1. データ・センターを選択し、サービス・プランを検討します。 **「次へ」**をクリックします。
 2. ロード・バランサーをデプロイするサブネットを選択します。 ロード・バランサー・サービス・インスタンスは、このサブネット上にいずれかのネットワーク・インターフェースを持ちます。 アプリケーション・サーバーがこのサブネット上にあるか、またはこのサブネットから到達できることを確認してください。 必要な場合は、VLAN スパンニングを有効にします。 **「次へ」**をクリックします。

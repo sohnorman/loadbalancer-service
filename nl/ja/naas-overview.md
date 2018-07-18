@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2018-01-08"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-01-08"
 # デモ: Network as a Service
 {: #naas-video}
 
-Load Balancer、Security Group、CDN などの IBM Cloud Network サービスにより、より高いセキュリティー、パフォーマンス、回復力を備えたクラウド・ネイティブ・アプリケーションを簡単に構築できるようになります。このデモでは、これらのサービスを使用して、ほんの数クリックで単純な 3 層 Web アプリを作成する方法について説明します。
+Load Balancer、Security Group、CDN などの IBM Cloud Network サービスにより、より高いセキュリティー、パフォーマンス、回復力を備えたクラウド・ネイティブ・アプリケーションを簡単に構築できるようになります。 このデモでは、これらのサービスを使用して、ほんの数クリックで単純な 3 層 Web アプリを作成する方法について説明します。
 
 <p>
   <div class="embed-responsive embed-responsive-16by9">

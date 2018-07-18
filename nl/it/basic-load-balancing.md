@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,14 +18,23 @@ lastupdated: "2017-08-21"
 Il servizio IBM Cloud load balancer distribuisce il traffico tra più istanze server (server virtuale e bare metal) che risiedono localmente, nello stesso data center. 
 
 ## Programma di bilanciamento del carico pubblico 
-Viene assegnato un nome dominio completo e accessibile pubblicamente alla tua istanza del servizio del programma di bilanciamento del carico. Devi utilizzare questo nome dominio per accedere alle tue applicazioni ospitate dietro il servizio del programma di bilanciamento del carico. Questo nome dominio potrebbe essere registrato con uno o più indirizzi IP. Gli indirizzi IP e il numero di indirizzi IP potrebbero cambiare nel tempo in base alle attività di manutenzione e ridimensionamento, che sono trasparenti agli utenti finali. Le istanze di calcolo di backend che ospitano la tua applicazione devono essere su una rete privata cloud IBM. 
+Viene assegnato un nome di dominio completo e accessibile pubblicamente alla tua istanza del servizio del programma di bilanciamento del carico. Devi utilizzare questo nome dominio per accedere alle tue applicazioni ospitate dietro il servizio del programma di bilanciamento del carico. Questo nome dominio potrebbe essere registrato con uno o più indirizzi IP pubblici. Gli indirizzi IP pubblici e il numero di indirizzi IP pubblici potrebbero cambiare nel tempo in base alle attività di manutenzione e ridimensionamento, che sono trasparenti agli utenti finali. Le istanze di calcolo di backend che ospitano la tua applicazione devono essere su una rete privata cloud IBM. 
 
 **NOTA:** ti raccomandiamo di eseguire il provisioning dei tuoi server di backend come ‘solo privato’, a meno che non richiedano la connettività pubblica diretta. Questa procedura ti aiuta ad avere una migliore protezione e a conservare il tuo indirizzo IP pubblico. Le applicazioni ospitate in questi server di backend sono ancora accessibili sulla rete pubblica utilizzando il programma di bilanciamento del carico.  
 
 Puoi scegliere di assegnare gli indirizzi IP pubblici del programma di bilanciamento del carico da un pool di sistema IBM (predefinito) o da una VLAN pubblica nel tuo account durante la creazione della tua istanza del servizio del programma di bilanciamento del carico.
 
+## Programma di bilanciamento del carico interno 
+Il programma di bilanciamento del carico interno è accessibile solo all'interno della rete privata IBM Cloud. 
+
+Proprio come a un programma di bilanciamento del carico pubblico, alla tua istanza del servizio del programma di bilanciamento del carico interno viene assegnato anche un nome di dominio completo. Tuttavia, questo nome dominio viene registrato con uno o più indirizzi IP privati. 
+
+In modo simile a un programma di bilanciamento del carico pubblico, gli indirizzi IP privati e il loro numero potrebbero cambiare nel tempo in base alle attività di manutenzione e ridimensionamento, che sono trasparenti agli utenti finali. 
+
+**NOTA:** anche le istanze di calcolo di backend che ospitano la tua applicazione devono essere sulla rete privata IBM Cloud.
+
 ## Protocolli/Porte applicazione di backend e frontend
-Puoi definire fino a 10 porte (protocolli) dell'applicazione di frontend e associarle alle rispettive porte (protocolli) nei server dell'applicazione di backend. Il nome dominio completo assegnato alla tua istanza del servizio del programma di bilanciamento del carico e le porte dell'applicazione di frontend sono esposti con il mondo esterno. Le richieste utente in entrata vengono ricevute su queste porte. 
+Puoi definire fino a dieci porte (protocolli) dell'applicazione di frontend e associarle alle rispettive porte (protocolli) nei server dell'applicazione di backend. Il nome di dominio completo assegnato alla tua istanza del servizio del programma di bilanciamento del carico e le porte dell'applicazione di frontend sono esposti con il mondo esterno. Le richieste utente in entrata vengono ricevute su queste porte. 
 
 D'altra parte, le porte di backend sono conosciute solo internamente. Queste porte di backend potrebbero non essere le stesse delle porte di frontend. Ad esempio, il programma di bilanciamento del carico può essere configurato per ricevere il traffico web/HTTP in entrata su nella porta di frontend 80, mentre i server di backend sono in ascolto sulla porta personalizzata 81. 
 

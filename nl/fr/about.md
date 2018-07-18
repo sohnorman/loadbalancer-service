@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,27 +16,33 @@ lastupdated: "2017-08-21"
 
 # A propos de
 
-Le service IBM Cloud Load Balancer aide les clients à améliorer la disponibilité des applications critiques pour l'activité de leur entreprise en répartissant le trafic entre plusieurs instances de serveur et en réacheminant le trafic vers des instances viables seulement.
+Le service Equilibreur de charge IBM Cloud aide les clients à améliorer la disponibilité des applications critiques pour l'activité de leur entreprise en répartissant le trafic entre plusieurs instances de serveur et en réacheminant le trafic vers des instances viables seulement.
 
 ## Présentation des fonctionnalités
-L'équilibreur de charge IBM Cloud offre les fonctionnalités suivantes :
+Le service Equilibreur de charge IBM Cloud offre les fonctionnalités suivantes :
 
 * Equilibreur de charge public (Internet)
-	* Service publiquement accessible via son nom de domaine complet
+	* Service accessible au public via son nom de domaine complet
+	* Instances de serveur de back end sur des sous-réseaux privés
+* Equilibreur de charge interne
+	* Service accessible en privé via son nom de domaine complet
+	* Demandes client acheminées sur le réseau privé
 	* Instances de serveur de back end sur des sous-réseaux privés
 * Equilibrage de charge de base
 	* Répartition du trafic basée sur les informations du port d'application à 4 couches
 	* Support des applications HTTP, HTTPS et TCP 
-	* Large choix de méthodes d'équilibrage de charge, par exemple Round Robin (RR), Round Robin pondéré ou Connexions minimum
-	* Equilibrage de charge entre le serveur virtuel et les instances de calcul bare metal se trouvant dans un centre de données
-* Diagnostics d'intégrité du serveur
+	* Large choix de méthodes d'équilibrage de charge, par exemple, le mode circulaire, le mode circulaire pondéré et le nombre minimal de connexions
+	* Equilibrage de charge entre le serveur virtuel et les instances de calcul bare metal installé localement dans un centre de données
+* Contrôles de santé du serveur
 	* Surveillance périodique de la santé du serveur afin de garantir le transfert du trafic vers des serveurs sains uniquement 
-	* Diagnostics d'intégrité à 4 couches pour les ports TCP et 7 couches pour les ports HTTP 
+	* Contrôles de santé à 4 couches pour les ports TCP et 7 couches pour les ports HTTP 
 * Déchargement SSL
-	* Arrêt du trafic SSL entrant (HTTPS) avec communication HTTP en texte en clair avec les serveurs de back end
+	* Arrêt du trafic SSL entrant (HTTPS) à l'aide d'une communication HTTP en texte en clair avec les serveurs de back end
 * Gestion de trafic avancée
 	* Adhésion client (persistance de session)
 	* Nombre de connexions maximum par port virtuel
 * Gestion aisée grâce à une interface graphique et une interface de programmation intuitives
 * Fiabilité intégrée 
 * Tarification basée sur l'utilisation 
+* Surveillance
+    * Surveille les métriques Débit, Connexions actives et Taux de connexion pour les protocoles HTTP, HTTPS et TCP au cours des intervalles de temps spécifiés par l'utilisateur. Pour plus d'informations, voir [Métriques de surveillance](monitoring-metrics.html). 

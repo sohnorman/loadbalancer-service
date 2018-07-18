@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -26,4 +26,4 @@ As verificações de funcionamento em portas HTTP e TCP são realizadas conforme
 
 * **TCP:** o Balanceador de carga tenta abrir uma conexão TCP com o servidor de backend em uma porta TCP especificada. A porta do servidor será marcada como funcional se a tentativa de conexão for bem-sucedida e a conexão será então encerrada. 
 
-	**NOTA:** o intervalo de verificação de funcionamento padrão é de 5 segundos, o tempo limite padrão em uma solicitação de verificação de funcionamento é de 2 segundos e o número padrão de novas tentativas é 2. 
+	**NOTA:** o intervalo de verificação de funcionamento padrão é de 5 segundos, o tempo limite padrão com relação a uma solicitação de verificação de funcionamento é de 2 segundos e o número padrão de novas tentativas é 2. 

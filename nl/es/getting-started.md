@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-04-13"
 
 ---
 
@@ -16,8 +16,18 @@ lastupdated: "2017-08-21"
 
 
 # Guía de inicio
+Para empezar a utilizar IBM Cloud Load Balancer necesitará dos elementos principales:
 
-Para empezar a utilizar el servicio IBM Cloud Load Balancer, seleccione **Red > Equilibradores de carga > IBM Cloud Load Balancer** desde el catálogo de IBM Cloud y, a continuación, lleve a cabo el siguiente procedimiento:
+* Una cuenta con IBM: [IBMid](https://www.ibm.com/account/us-en/signup/register.html)
+* Un servidor IBM, ya sea [nativo](https://console.bluemix.net/docs/bare-metal/about.html#getting-started-with-bare-metal-servers) o [una instancia de servidor virtual (VSI)](https://console.bluemix.net/docs/vsi/vsi_index.html#getting-started-with-virtual-servers)
+ 
+Si necesita ayuda para obtener una cuenta de **IBMid**, póngase en contacto con su [representante de ventas de IBM](https://www.ibm.com/cloud-computing/bluemix/contact-us) para obtener instrucciones adicionales.
+
+Si tiene una cuenta de infraestructura de IBM Cloud (SoftLayer) existente, puede [enlazar su cuenta](https://console.bluemix.net/docs/account/softlayerlink.html#unifyingaccounts) con el IBMid. 
+
+## Realizar un pedido de un equilibrador de carga
+
+Para realizar un pedido de un servicio IBM Cloud Load Balancer, seleccione **Red > Load Balancers > IBM Cloud Load Balancer** en el [catálogo de IBM Cloud](https://console.bluemix.net/catalog/infrastructure/load-balancer-group). Inicie la sesión o cree una cuenta nueva y, a continuación, realice el procedimiento siguiente:
 
 1. Seleccione el centro de datos y revise el plan de servicio. Pulse **Siguiente**.
 2. Seleccione la subred en la que desee desplegar el equilibrador de carga. La instancia del servicio de equilibrador de carga tendrá una de las interfaces de red en esta subred. Asegúrese de que los servidores de aplicaciones estén en esta subred o sean accesibles desde la misma. Si es necesario, habilite la expansión de VLAN. Pulse **Siguiente**.

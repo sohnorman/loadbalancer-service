@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,12 +18,21 @@ lastupdated: "2017-08-21"
 O serviço de balanceador de carga do IBM Cloud distribui tráfego entre múltiplas instâncias do servidor (bare metal e servidor virtual) que residem localmente, dentro do mesmo data center. 
 
 ## Balanceador de carga público 
-Um nome completo do domínio publicamente acessível é designado à instância do serviço do balanceador de carga. Deve-se usar esse nome de domínio para acessar seus aplicativos hospedados atrás do serviço de balanceador de carga. Esse nome de domínio pode ser registrado com um ou mais endereços IP. Os endereços IP e o número de endereços IP podem mudar ao longo do tempo com base nas atividades de manutenção e ajuste de escala, que são transparentes para os usuários finais. As instâncias de cálculo de backend que hospedam seu aplicativo devem estar em uma rede privada do IBM Cloud. 
+Um nome completo do domínio publicamente acessível é designado à instância do serviço do balanceador de carga. Deve-se usar esse nome de domínio para acessar seus aplicativos hospedados atrás do serviço de balanceador de carga. Esse nome de domínio pode ser registrado com um ou mais endereços IP públicos. Os endereços IP públicos e o número de endereços IP públicos podem mudar ao longo do tempo com base nas atividades de manutenção e ajuste de escala, que são transparentes para os usuários finais. As instâncias de cálculo de backend que hospedam seu aplicativo devem estar em uma rede privada do IBM Cloud. 
 
 **NOTA:** como uma boa prática, recomenda-se provisionar seus servidores de backend como 'somente privados’, a menos que requeiram conectividade pública direta. Essa prática ajuda a alcançar melhor segurança, além de preservar o endereço IP público. Os aplicativos hospedados nesses servidores de backend continuam acessíveis na rede pública usando o balanceador de carga.  
 
 É possível optar por alocar os endereços IP públicos do balanceador de carga de um conjunto do sistema IBM (padrão) ou de uma VLAN pública sob sua conta ao
 criar sua instância de serviço de balanceador de carga.
+
+## Balanceador de carga interno
+O balanceador de carga interno só pode ser acessado dentro da rede privada do IBM Cloud. 
+
+Assim como acontece com um balanceador de carga público, um nome completo do domínio também é designado à sua instância de serviço do balanceador de carga interno. Entretanto, esse nome de domínio é registrado com um ou mais endereços IP privados. 
+
+Semelhante a um balanceador de carga público, os endereços IP privados e seus números podem mudar ao longo do tempo com base em atividades de manutenção e ajuste de escala, que são transparentes para os usuários finais. 
+
+**NOTA:** as instâncias de cálculo de backend que hospedam seu aplicativo também devem estar na rede privada do IBM Cloud.
 
 ## Portas/Protocolos dos aplicativos front-end e backend
 É possível definir até dez portas (protocolos) do aplicativo front-end e mapeá-las para as respectivas portas (protocolos) nos servidores de aplicativos backend. O nome completo do domínio designado à instância do serviço do balanceador de carga e as portas do aplicativo front-end são expostos ao mundo externo. As solicitações recebidas de usuários são recebidas nessas portas. 

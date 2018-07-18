@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -26,4 +26,4 @@ Statusprüfungen für HTTP- und TCP-Ports werden wie folgt ausgeführt:
 
 * **TCP:** Von der Lastausgleichsfunktion wird versucht, eine TCP-Verbindung mit dem Back-End-Server an einem bestimmten TCP-Port zu öffnen. Der Server-Port wird als ordnungsgemäß funktionierend markiert, wenn die Verbindung erfolgreich ist; die Verbindung wird anschließend geschlossen. 
 
-	**HINWEIS:** Das Standardintervall für die Statusprüfung beträgt 5 Sekunden, das Standardzeitlimit für eine Statusprüfungsanforderung beträgt 2 Sekunden und der Standardwert für die Wiederholungsversuche ist 2. 
+	**HINWEIS:** Der Standardwert für das Statusprüfungsintervall beträgt 5 Sekunden, das Standardzeitlimit für eine Statusprüfungsanforderung beträgt 2 Sekunden und die Standardanzahl für die Anzahl der Wiederholungen beträgt 2 Wiederholungen. 

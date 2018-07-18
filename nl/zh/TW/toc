@@ -7,7 +7,9 @@ IBM Cloud Load Balancer 服務
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    whats-new-lbaaa.md
     explore-load-balancers.md
+    pricing.md
     naas-overview.md
     {: .navgroup-end}
 
@@ -16,10 +18,22 @@ IBM Cloud Load Balancer 服務
     health-checks.md
     ssl-offload.md
     advanced-traffic.md
+    monitoring-metrics.md
+
+    {: .topicgroup}
+    逐步：使用「廣域負載平衡」改善應用程式可靠性及可調整性
+        application-reliability.md
+        create-cis.md
+        input-domain.md
+        begin-config.md
+        identify-app-resources.md
+        define-global-lb.md
+
     {: .navgroup-end}
     
     {: .navgroup id="reference"}
     apis.md
+    external-resources.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}

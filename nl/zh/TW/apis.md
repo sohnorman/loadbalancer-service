@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,9 +18,9 @@ lastupdated: "2017-08-21"
 「SoftLayer® 應用程式設計介面 (API)」是開發介面，可讓開發人員及系統管理者直接與 SoftLayer 的後端系統互動。
 {:shortdesc}
 
-SoftLayer API (SLAPI) 具備「客戶入口網站」中的許多特性，這一般表示，如果可以在「客戶入口網站」中進行互動，則也可以在 API 中執行。因為您可以在 API 內透過程式設計方式與 SoftLayer 環境的所有部分進行互動，所以您可以使用 API 自動化作業。
+SoftLayer API (SLAPI) 具備「客戶入口網站」中的許多特性。一般來說，如果可以在「客戶入口網站」中進行某項互動，則也可以在 API 中執行。因此，因為您可以在 API 內透過程式設計方式與 SoftLayer 環境的所有部分進行互動，所以可以使用 API 將作業自動化。
 
-SoftLayer API 是一種「遠端程序呼叫」系統。每一個呼叫都需要向 API 端點傳送資料，反過來則要接收結構化資料。透過 SLAPI 傳送及接收資料時使用何種格式，視您選擇哪一個 API 實作而定。SLAPI 目前使用 SOAP、XML-RPC 或 REST 進行資料傳輸。 
+SoftLayer API (SLAPI) 是一種「遠端程序呼叫」系統。每一個呼叫都需要向 API 端點傳送資料，反過來則要接收結構化資料。透過 SLAPI 傳送及接收資料時使用何種格式，視您選擇哪一個 API 實作而定。SLAPI 目前使用 SOAP、XML-RPC 或 REST 進行資料傳輸。 
 
 如需 SoftLayer API、IBM Cloud Load Balancer 服務 API 的相關資訊，請參閱「SoftLayer 開發網路」中的下列資源：
 * [SoftLayer API 概觀 ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](https://sldn.softlayer.com/article/softlayer-api-overview){: new_window} 
@@ -30,10 +30,11 @@ SoftLayer API 是一種「遠端程序呼叫」系統。每一個呼叫都需要
 * [SoftLayer_Network_LBaaS_Listener API ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Listener){: new_window}
 * [SoftLayer_Network_LBaaS_Member API ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
 * [SoftLayer_Network_LBaaS_HealthMonitor API ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
+* [SoftLayer_Network_LBaaS_SSLCipher API ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_SSLCipher){: new_window}
 
 下列範例搭配使用 Python 與 zeep SOAP 用戶端。
 
-## 建立負載平衡器的範例
+## 建立負載平衡器
 ### 擷取產品套件 ID 及項目價格
 ```
 from zeep import Client, xsd
@@ -156,10 +157,13 @@ orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
     useHourlyPricing=True,      # Required since LBaaS is an hourly service
-    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
-                                # balancer public IPs from an IBM system pool,
-                                # otherwise "False" from the public VLAN
-                                # under your account
+    useSystemPublicIpPool=True, # Optional - Default is "True" to allocate load balancer public IPs 
+                                # from an IBM system pool, otherwise "False" from the public VLAN
+                                # under your account. useSystemPublicIpPool is only applicable to
+                                # public load balancers
+    isPublic=True               # Optional - Default is "True" to create a public load balancer.
+                                # isPublic distinguishes between public ("True") and
+                                # internal ("False") load balanacer
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -227,10 +231,13 @@ orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
     useHourlyPricing=True,      # Required since LBaaS is an hourly service
-    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
-                                # balancer public IPs from an IBM system pool,
-                                # otherwise "False" from the public VLAN
-                                # under your account
+    useSystemPublicIpPool=True, # Optional - Default is "True" to allocate load balancer public IPs 
+                                # from an IBM system pool, otherwise "False" from the public VLAN
+                                # under your account. useSystemPublicIpPool is only applicable to
+                                # public load balancers
+    isPublic=True               # Optional - Default is "True" to create a public load balancer.
+                                # isPublic distinguishes between public ("True") and
+                                # internal ("False") load balanacer
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -248,7 +255,7 @@ except Fault as exp:
 ```
 {: codeblock}
 
-## 取得負載平衡器的範例
+## 擷取負載平衡器上的詳細資料
 ### 列出所有負載平衡器
 ```
 from zeep import Client
@@ -322,7 +329,7 @@ print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
 {: codeblock}
 
-## 更新負載平衡器的範例
+## 更新負載平衡器
 ### 新增成員
 ```
 from zeep import Client, xsd 
@@ -434,8 +441,7 @@ print listeners
 ```
 {: codeblock}
 
-## 取消負載平衡器的範例
-### 取消負載平衡器
+## 取消負載平衡器
 ```
 from zeep import Client, xsd 
 from zeep.exceptions import Fault
@@ -476,3 +482,98 @@ except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
 {: codeblock}
+
+## 檢視負載平衡器的監視度量值
+### 取得 HTTP 資料流量的傳輸量
+```
+from zeep import Client
+
+# Username and apikey SLAPI call
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID of load balancer
+uuid = '<Your load balancer UUID>'
+# The name of the metric. 
+# Options are Throughput, ActiveConnections, and ConnectionRate
+nameOfMetric = 'Throughput'
+# The time interval over which the metric is to be measured
+# Options are 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '1hour' 
+# UUID of the protocol whose throughput your requesting
+protocolUuid = '<UUID of the protocol>'
+
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD for authentication
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# Create XSD value objects
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Retrieve throughput of hhtp traffic for a specific load balancer object
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval,
+        listenerUuid=protocolUuid
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```
+{: codeblock}
+
+### 取得負載平衡器的傳輸量
+```
+from zeep import Client, xsd 
+
+# Username and apikey SLAPI call
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID of load balancer
+uuid = '<Your load balancer UUID>'
+# The name of the metric.
+# Options are Throughput, ActiveConnections, and ConnectionRate
+nameOfMetric = 'Throughput'
+# The time interval over which the metric is to be measured
+# Options are 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '6hours' 
+# If no protocol is specified the throughput of all protocols is returned.
+# protocolUuid = '<UUID of the protocol>'
+
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD for authentication
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# Create XSD value objects
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Retrieve throughput of hhtp traffic for a specific load balancer object
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```

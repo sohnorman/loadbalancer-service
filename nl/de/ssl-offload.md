@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,6 +16,22 @@ lastupdated: "2017-08-21"
 
 # SSL-Auslagerung
 
-Für alle eingehenden HTTPS-Verbindungen wird die SSL-Verbindung vom Service für die Lastausgleichsfunktion terminiert und eine unverschlüsselte HTTP-Kommunikation mit dem Back-End-Server aufgebaut. So werden CPU-intensive SSL-Handshakes und Tasks zur Verschlüsselung und Entschlüsselung von den Back-End-Servern ausgelagert, damit diese ihre gesamten CPU-Zyklen für die Verarbeitung des Anwendungsdatenverkehrs nutzen können. Ein SSL-Zertifikat ist erforderlich, damit von der Lastausgleichsfunktion SSL-Auslagerungstasks durchgeführt werden können. Sie können ein bereits vorhandenes SSL-Zertifikat verwenden oder ein neues kaufen und dieses über den [IBM Cloud-Zertifikatsspeicher](https://control.softlayer.com/security/sslcerts) verwalten. 
+Für alle ankommenden HTTPS-Verbindungen beendet die Lastausgleichsfunktion die SSL-Verbindung und baut eine ungeschützte HTTP-Kommunikation mit dem Back-End-Server auf. CPU-intensive SSL-Handshakes sowie Verschlüsselungs- und Entschlüsselungstasks werden von den Back-End-Servern ausgelagert, sodass sie alle CPU-Zyklen für die Verarbeitung des Anwendungsdatenverkehrs verwenden können. 
 
-**HINWEIS:** Vom Service für die Lastausgleichsfunktion wird TLS Version 1.2 mit SSL-Auslagerung unterstützt. SSL Version 3 wird aufgrund der Sicherheitslücken nicht unterstützt. Derzeit kann die SSL-Verschlüsselungsliste nicht angepasst werden. 
+Ein SSL-Zertifikat ist erforderlich, damit von der Lastausgleichsfunktion SSL-Auslagerungstasks durchgeführt werden können. Sie können ein bereits vorhandenes SSL-Zertifikat verwenden oder ein neues kaufen und dieses über den [IBM Cloud-Zertifikatsspeicher](https://control.softlayer.com/security/sslcerts) verwalten. 
+
+# SSL-Cipher-Suites
+Von der Lastausgleichsfunktion wird TLS 1.2 mit SSL-Auslagerung unterstützt.
+
+Von der Lastausgleichsfunktion werden folgende SSL-Verschlüsselungen unterstützt:
+
+* ECDHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-AES256-SHA384
+* AES256-GCM-SHA384
+* AES256-SHA256
+* ECDHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES128-SHA256
+* AES128-GCM-SHA256
+* AES128-SHA256
+
+Wenn für die Lastausgleichsfunktion mindestens ein HTTPS-Front-End-Anwendungsport (Protokoll) konfiguriert ist, sind standardmäßig alle oben vordefinierten SSL-Verschlüsselungen für die Lastausgleichsfunktion aktiviert. Sie können bei Bedarf auch andere SSL-Verschlüsselungen für die Lastausgleichsfunktion aktivieren.

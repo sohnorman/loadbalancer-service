@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -15,14 +15,23 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # Basislastausgleich
-Vom IBM Cloud Load Balancer-Service wird der Datenverkehr auf mehrere Serverinstanzen (Bare-Metal-Server und virtuelle Server) verteilt, die sich lokal in demselben Rechenzentrum befinden.  
+Vom IBM Cloud Load Balancer-Service wird der Datenverkehr auf mehrere Serverinstanzen (Bare-Metal-Server und virtuelle Server) verteilt, die sich lokal in demselben Rechenzentrum befinden. 
 
 ## Öffentliche Lastausgleichsfunktion 
-Der Instanz des Service für die Lastausgleichsfunktion wird ein öffentlicher und vollständig qualifizierter Domänenname zugewiesen. Sie müssen diesen Domänennamen für den Zugriff auf die Anwendungen verwenden, die hinter dem Service für die Lastausgleichsfunktion gehostet werden. Dieser Domänenname kann für eine oder mehrere IP-Adressen registriert werden. Die IP-Adressen und die Anzahl der IP-Adressen kann sich aufgrund von Wartungs- und Skalierungsaktivitäten im Laufe der Zeit ändern; diese Aktivitäten sind für die Endbenutzer transparent. Die Back-End-Recheninstanzen, auf denen die Anwendung gehostet wird, müssen sich in einem privaten Netz in einer IBM Cloud befinden. 
+Der Instanz des Service für die Lastausgleichsfunktion wird ein öffentlicher und vollständig qualifizierter Domänenname zugewiesen. Sie müssen diesen Domänennamen für den Zugriff auf die Anwendungen verwenden, die hinter dem Service für die Lastausgleichsfunktion gehostet werden. Dieser Domänenname kann für mindestens eine öffentliche IP-Adresse registriert werden. Die öffentlichen IP-Adressen und die Anzahl der öffentlichen IP-Adressen können sich im Lauf der Zeit aufgrund von Wartungs- und Skalierungsaktivitäten ändern, die für die Endbenutzer transparent sind. Die Back-End-Recheninstanzen, auf denen die Anwendung gehostet wird, müssen sich in einem privaten Netz in einer IBM Cloud befinden. 
 
 **HINWEIS:** Es wird empfohlen, Back-End-Server ausschließlich privat bereitzustellen, sofern nicht eine direkte öffentliche Verbindung erforderlich ist. Dies sorgt für eine bessere Sicherheit und Ihre öffentliche IP-Adresse wird beibehalten. Die Anwendungen, die auf diesen Back-End-Servern gehostet werden, sind mithilfe der Lastausgleichsfunktion weiterhin über das öffentliche Netz verfügbar.  
 
 Bei der Erstellung der Load Balancer-Serviceinstanz können Sie öffentliche IP-Adressen für die Lastausgleichsfunktion entweder aus einem IBM Systempool (Standardeinstellung) oder aus einem öffentlichen VLAN unter Ihrem Konto zuordnen.
+
+## Interne Lastausgleichsfunktion
+Auf die interne Lastausgleichsfunktion kann nur im privaten IBM Cloud-Netz zugegriffen werden. 
+
+Analog zur öffentlichen Lastausgleichsfunktion wird auch der Instanz eines internen Lastenausgleichsservice ein vollständig qualifizierter Domänenname zugeordnet. Dieser Domänenname ist jedoch für mindestens eine private IP-Adresse registriert. 
+
+Ähnlich wie bei einer öffentlichen Lastausgleichsfunktion können sich die privaten IP-Adressen und die Anzahl der privaten IP-Adressen im Lauf der Zeit aufgrund von Wartungs- und Skalierungsaktivitäten ändern, die für die Endbenutzer transparent sind.  
+
+**HINWEIS:** Die Back-End-Recheninstanzen, auf denen die Anwendung gehostet wird, müssen sich auch in einem privaten Netz in einer IBM Cloud befinden.
 
 ## Ports bzw. Protokolle von Front-End- und Back-End-Anwendungen
 Sie können bis zu zehn Ports (bzw. Protokolle) für Front-End-Anwendungen definieren und diese den entsprechenden Ports (bzw. Protokollen) auf den Back-End-Anwendungsservern zuordnen. Der vollständig qualifizierte Domänenname, der der Serviceinstanz für den Lastausgleich zugewiesen ist, und die Ports der Front-End-Anwendung sind öffentlich zugänglich. An diesen Ports werden die eingehenden Benutzeranforderungen empfangen. 

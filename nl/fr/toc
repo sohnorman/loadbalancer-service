@@ -2,12 +2,14 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="loadbalancer-service" audience="network" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
-Service IBM Cloud Load Balancer
+Service Equilibreur de charge IBM Cloud
 
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    whats-new-lbaaa.md
     explore-load-balancers.md
+    pricing.md
     naas-overview.md
     {: .navgroup-end}
 
@@ -16,10 +18,22 @@ Service IBM Cloud Load Balancer
     health-checks.md
     ssl-offload.md
     advanced-traffic.md
+    monitoring-metrics.md
+
+    {: .topicgroup}
+    Procédure détaillée : Amélioration de la fiabilité et de l'évolutivité des applications à l'aide de l'équilibrage de charge global
+        application-reliability.md
+        create-cis.md
+        input-domain.md
+        begin-config.md
+        identify-app-resources.md
+        define-global-lb.md
+
     {: .navgroup-end}
     
     {: .navgroup id="reference"}
     apis.md
+    external-resources.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}

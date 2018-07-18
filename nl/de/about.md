@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,13 +16,17 @@ lastupdated: "2017-08-21"
 
 # Produktinformation
 
-Der IBM Cloud Load Balancer-Service unterstützt die Kunden beim Verbessern der Verfügbarkeit ihrer geschäftskritischen Anwendungen; dazu wird der Datenverkehr auf mehrere Anwendungsserverinstanzen verteilt und ausschließlich an ordnungsgemäß funktionierende Instanzen weitergeleitet. 
+Der IBM Cloud Load Balancer-Service unterstützt die Kunden beim Verbessern der Verfügbarkeit ihrer geschäftskritischen Anwendungen; dazu wird der Datenverkehr auf mehrere Anwendungsserverinstanzen verteilt und ausschließlich an ordnungsgemäß funktionierende Instanzen weitergeleitet.
 
 ## Übersicht über die Features
 Der IBM Cloud Load Balancer-Service bietet die folgenden Features:
 
-* Öffentliche Lastausgleichsfunktion (im Internet)
-	* Über vollständig qualifizierten Domänennamen öffentlich zugänglicher Service
+* Öffentliche Lastausgleichsfunktion (mit Internetverbindung)
+	* Über vollständig qualifizierten Domänennamen (FQDN) öffentlich zugänglicher Service
+	* Back-End-Serverinstanzen für private Teilnetze
+* Interne Lastausgleichsfunktion
+	* Über vollständig qualifizierten Domänennamen (FQDN) privat zugänglicher Service
+	* Clientanforderungen werden über das private Netz umgeleitet
 	* Back-End-Serverinstanzen für private Teilnetze
 * Basislastausgleich
 	* Verteilung des Datenverkehrs auf der Basis einer Anwendungsportinformtion der Ebene 4 (Layer-4)
@@ -40,3 +44,5 @@ Der IBM Cloud Load Balancer-Service bietet die folgenden Features:
 * Einfache Verwaltung durch intuitive grafische Schnittstelle und API
 * Integrierte Zuverlässigkeit 
 * Nutzungsorientierte Preisgestaltung 
+* Überwachung
+    * Überwacht Metriken für Durchsatz, aktive Verbindungen und Verbindungsrate für HTTP-, HTTPS- und TCP-Protokolle über bestimmte Zeitintervalle hinweg. Weitere Details finden Sie unter [Überwachungsmetriken](monitoring-metrics.html).

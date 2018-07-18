@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -23,14 +23,15 @@ Faites défiler l'écran vers la droite pour visualiser la totalité du tableau 
 
 |        | [Equilibreur de charge IBM Cloud](https://console.bluemix.net/docs/infrastructure/loadbalancer-service/getting-started.html#getting-started)| [Equilibreur de charge local](https://console.bluemix.net/docs/infrastructure/local-load-balancer/getting-started.html#getting-started) (partagé)| [Equilibreur de charge local](https://console.stage1.bluemix.net/docs/infrastructure/local-load-balancer/getting-started.html#getting-started) (dédié)| [Citrix NetScaler](https://console.bluemix.net/docs/infrastructure/citrix-netscaler-vpx/getting-started.html#getting-started-with-citrix-netscaler) VPX/MPX (Standard)| [Citrix NetScaler](https://console.bluemix.net/docs/infrastructure/citrix-netscaler-vpx/getting-started.html#getting-started-with-citrix-netscaler) VPX/MPX (Platinum) |
 |------- | :------: | :------: | :------: | :------: | :------: |
-|**VIP public**|Oui|Oui|Oui|Oui|Oui|
-|**VIP privé**|Non|Non|Oui|Oui|Oui|
-|**Couche 4 LB**|Oui|Oui|Oui|Oui|Oui|
-|**Couche 7 LB**|Non|Persistance des cookies|Persistance des cookies|Oui|Oui|
-|**Diagnostics d'intégrité**|Oui|Oui|Oui|Oui|Oui|
-|**Déchargement SSL**|Oui|Oui|Oui|Oui|Oui|
-|**Gestion**|via le portail IBM|via le portail IBM|via le portail IBM|Auto-gestion (interface fournisseur)|Auto-gestion (interface fournisseur)|
-|**Haute disponibilité**|Intégrée|Intégrée|En option|En option|En option|
-|**LB avancé (optimisation TCP, compression, mise en cache, WAF)**|Non|Non|Non|Limité|Oui|
-|**LB global (GLB)**|Non|Non|Non|Non|Oui|
-|**Tarification**|Basée sur l'utilisation|Forfait mensuel|Forfait mensuel|Forfait mensuel|Forfait mensuel|
+|**VIP public**|Oui|Oui|Oui|Oui|Oui |
+|**VIP privé**|Oui|Non|Oui|Oui|Oui |
+|**Couche 4 LB**|Oui|Oui|Oui|Oui|Oui |
+|**Couche 7 LB**|Non|Persistance des cookies|Persistance des cookies|Oui|Oui |
+|**Contrôles de santé**|Oui|Oui|Oui|Oui|Oui |
+|**Mise à l'échelle horizontale**|Oui|Non|Non|Non|Non |
+|**Déchargement SSL**|Oui|Oui|Oui|Oui|Oui |
+|**Gestion**|via le portail IBM|via le portail IBM|via le portail IBM|Auto-gestion (interface fournisseur)|Auto-gestion (interface fournisseur) |
+|**Haute disponibilité**|Intégrée|Intégrée|En option|En option|En option |
+|**LB avancé (optimisation TCP, compression, mise en cache, WAF)**|Non|Non|Non|Limité|Oui |
+|**LB global (GLB)**|Non|Non|Non|Non|Oui |
+|**Tarification**|Basée sur l'utilisation|Forfait mensuel|Forfait mensuel|Forfait mensuel|Forfait mensuel |

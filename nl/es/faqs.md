@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-11-02"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2017-11-02"
 
 # Preguntas más frecuentes
 
-En esta sección, encontrará respuestas a las preguntas más frecuentes sobre el servicio IBM Cloud Load Balancer.
+Esta sección contiene respuestas a algunas preguntas frecuentes sobre el servicio de equilibrador de carga de IBM Cloud.
 
 ## ¿Cuántas opciones de equilibrio de carga hay disponibles en {{site.data.keyword.BluSoftlayer_notm}}?
 
@@ -34,56 +34,42 @@ Al crear un nuevo servicio de equilibrador de carga, puede definir hasta dos pue
 
 50.
 
-
-
-## ¿Puedo crear un equilibrador de carga privado de uso interno al que solo tengan acceso los clientes internos?  
-
-En estos momentos, no. El servicio alojado en el equilibrador de carga de IBM Cloud tendrá asignado un nombre de dominio calificado al completo de acceso público desde Internet. 
-
 ## ¿Cuáles son los valores predeterminados y los permitidos para los distintos parámetros de comprobación de estado?
 
 Los valores predeterminados y los permitidos se enumeran a continuación:
 
 * **Intervalo de comprobación de estado:** el valor predeterminado es de 5 segundos, el rango oscila entre 2 y 60 segundos
 * **Tiempo de espera de respuesta de la comprobación de estado:** el valor predeterminado es de 2 segundos, el rango oscila entre 1 y 59 segundos
-* **Número máximo de reintentos:** el valor predeterminado es de 2 reintentos, el rango oscila entre 1 y 10 reintentos
+* **Número máximo de reintentos:** El valor predeterminado es de 2 reintentos y el rango oscila de 1 a 10 reintentos
 
-**Nota:** el valor de tiempo de espera de la respuesta de comprobación de estado siempre debe ser inferior al valor del intervalo de la comprobación de estado. 
+**NOTA:** el valor de tiempo de espera de la respuesta de comprobación de estado siempre debe ser inferior al valor del intervalo de la comprobación de estado. 
 
 ## ¿Puedo utilizar instancias de cálculo que residan en centros de datos remotos con este servicio? 
 
-Se recomienda que el servicio de equilibrador de carga y las instancias de cálculo residan localmente en el mismo centro de datos. La interfaz gráfica de usuario del servicio de equilibrador de carga no muestra las instancias de cálculo de otros centros de datos remotos. Con todo, la GUI puede incluir instancias de cálculo de otros centros de datos de la misma ciudad (por ejemplo, centros de datos cuyos nombres compartan las tres primeras letras, como DALxx. De todas formas, se puede utilizar la interfaz de la API para añadir instancias de cálculo desde cualquier centro de datos remoto. 
+Le recomendamos que el servicio de equilibrador de carga y las instancias de cálculo residan localmente en el mismo centro de datos. La interfaz gráfica de usuario (GUI) del servicio de equilibrador de carga no muestra las instancias de cálculo de otros centros de datos remotos. Con todo, la GUI puede incluir instancias de cálculo de otros centros de datos de la misma ciudad (por ejemplo, centros de datos cuyos nombres compartan las tres primeras letras, como DALxx). De todas formas, se puede utilizar la interfaz de la API para añadir instancias de cálculo desde cualquier centro de datos remoto. 
 
-## ¿Qué versión de TLS se soporta con la descarga SSL? ¿Qué cifrados se soportan?
+## ¿Qué versión de TLS se soporta con la descarga SSL?
 
 El servicio Cloud Load Balancer soporta TLS 1.2 con terminación de SSL. 
 
 En la siguiente lista, se enumeran los cifrados soportados (listados en orden de precedencia):  
 
-* ECDHE-RSA-AES256-GCM-SHA384 
-* ECDHE-RSA-AES256-SHA384 
-* DHE-RSA-AES256-GCM-SHA384 
-* DHE-RSA-AES256-SHA256 
-* AES256-GCM-SHA384 
-* AES256-SHA256 
-* ECDHE-RSA-AES128-GCM-SHA256 
-* ECDHE-RSA-AES128-SHA256 
-* DHE-RSA-AES128-GCM-SHA256 
-* DHE-RSA-AES128-SHA256 
-* AES128-GCM-SHA256 
-* AES128-SHA256 
-
-## ¿Puede personalizar la lista de cifrado SSL?
-
-En estos momentos, no.
+* ECDHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-AES256-SHA384
+* AES256-GCM-SHA384
+* AES256-SHA256
+* ECDHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES128-SHA256
+* AES128-GCM-SHA256
+* AES128-SHA256
 
 ## ¿Cuál es el número máximo de instancias de servicio del equilibrador de carga que puedo crear en mi cuenta? 
 
 Actualmente, puede crear un máximo de 20 instancias de servicio. Si necesita más instancias, póngase en contacto con el soporte de IBM. 
 
-## ¿Puede utilizarse el equilibrador de carga como servicio con VMWare? 
+## ¿Puede utilizarse el servicio de equilibrador de carga de IBM Cloud con VMware? 
 
-Las direcciones privadas portátiles de SoftLayer asignadas por máquinas virtuales VMware se pueden especificar como servidores back-end en el equilibrador de carga. Esta característica actualmente solo está disponible a través de la API, y no por la interfaz de usuario web (GUI). Las IP privadas portátiles añadidas a través de la API aparecen como "Desconocidas" en la GUI, ya que no han sido asignadas por SoftLayer. Tenga en cuenta que esta clase de configuración se puede utilizar con otros hipervisores, como Xen y KVM.
+Las máquinas virtuales VMware que tienen asignadas direcciones privadas portátiles de SoftLayer se pueden especificar como servidores back-end en el equilibrador de carga. Esta característica actualmente solo está disponible utilizando la API, y no por la interfaz de usuario web (GUI). Las IP privadas portátiles añadidas mediante la API aparecen como "Desconocidas" en la GUI, ya que no han sido asignadas por SoftLayer. Tenga en cuenta que esta clase de configuración se puede utilizar con otros hipervisores, como Xen y KVM.
 
 Las direcciones no SoftLayer asignadas por máquinas virtuales VMware (como con las redes VMware NSX) no se pueden añadir directamente como servidores back-end al equilibrador de carga. Sin embargo, en función de su configuración, es posible configurar un intermediario, como una pasarela NSX, que tenga una dirección privada de SoftLayer como el servidor back-end para el equilibrador de carga (con los servidores reales siendo máquinas virtuales conectadas a red(es) gestionadas por VMware NSX).
 
@@ -91,3 +77,6 @@ Las direcciones no SoftLayer asignadas por máquinas virtuales VMware (como con 
 
 El puerto TCP 56501 se utiliza para la gestión. Asegúrese de que el tráfico a este puerto, así como los puertos de su aplicación, no estén bloqueados por su cortafuegos, de lo contrario el suministro del equilibrador de carga fallará.
 
+## ¿Qué debo hacer si obtengo un error "Esta cuenta de SoftLayer no está enlazada a ninguna cuenta de Bluemix"?
+
+Compruebe que la cuenta de SoftLayer está enlazada con la cuenta de Bluemix. Consulte [Enlace de Softlayer](https://console.bluemix.net/docs/account/softlayerlink.html#switching-to-ibmid) para obtener más instrucciones.

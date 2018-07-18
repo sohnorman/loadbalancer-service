@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-11-02"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,11 +16,11 @@ lastupdated: "2017-11-02"
 
 # Perguntas mais frequentes
 
-Esta seção contém respostas para algumas perguntas mais frequentes sobre o IBM Cloud Load Balancer Service.
+Esta seção contém respostas a algumas perguntas mais frequentes sobre o serviço IBM Cloud Load Balancer.
 
 ## Quantas opções de balanceamento de carga estão disponíveis no {{site.data.keyword.BluSoftlayer_notm}}?
 
-Para uma comparação detalhada de ofertas IBM Load Balancer, consulte [Explorar balanceadores de carga](https://dev-console.bluemix.net/docs/infrastructure/loadbalancer-service/explore-load-balancers.html#explore-load-balancers).
+Para uma comparação detalhada de ofertas IBM Load Balancer, consulte [Explorar Load Balancers](https://dev-console.bluemix.net/docs/infrastructure/loadbalancer-service/explore-load-balancers.html#explore-load-balancers).
 
 ## Posso usar um nome DNS diferente para meu balanceador de carga?
 
@@ -34,59 +34,49 @@ Ao tentar criar um novo serviço de balanceador de carga, será possível defini
 
 50.
 
-## Posso criar um balanceador de carga privado somente interno que possa ser acessado apenas por clientes internos?  
-
-Não no momento. O serviço hospedado no balanceador de carga do IBM Cloud receberá um nome completo do domínio acessível por meio da Internet pública. 
-
 ## Quais são as configurações padrão e os valores permitidos para os vários parâmetros de verificação de funcionamento?
 
 As configurações padrão e os valores permitidos são listados abaixo:
 
 * **Intervalo de verificação de funcionamento:** o padrão é 5 segundos, o intervalo é de 2 a 60 segundos
 * **Tempo limite de resposta de verificação de funcionamento:** o padrão é 2 segundos, o intervalo é de 1 a 59 segundos
-* **Máximo de novas tentativas:** o padrão são 2 novas tentativas, o intervalo é de 1 a 10 novas tentativas
+* **Máx. de novas tentativas:** o padrão é de 2 novas tentativas e o intervalo é de 1 a 10 novas tentativas
 
-**Nota:** o valor do tempo limite de resposta de verificação de funcionamento deve sempre ser menor que o valor do intervalo de verificação de funcionamento. 
+**NOTA:** o valor de tempo limite de resposta de verificação de funcionamento deve sempre ser menor que o valor do intervalo de verificação de funcionamento. 
 
 ## Posso usar instâncias de cálculo que residam em data centers remotos com esse serviço? 
 
-Recomenda-se que o serviço de balanceador de carga e as instâncias de cálculo residam localmente no mesmo data center. A interface gráfica (GUI) do serviço de balanceador de carga não mostrará as instâncias de cálculo de outros data centers remotos. No entanto, a GUI incluirá instâncias de cálculo de outros data centers na mesma cidade (por exemplo, data centers cujos nomes compartilham as primeiras três letras, como DALxx). Todavia, é possível usar a interface de API para incluir instâncias de cálculo de qualquer data center remoto. 
+Recomendamos que seu serviço de balanceador de carga e suas instâncias de cálculo residam localmente dentro do mesmo data center. A interface gráfica (GUI) do serviço de balanceador de carga não mostrará as instâncias de cálculo de outros data centers remotos. Entretanto, a GUI incluirá instâncias de cálculo de outros data centers dentro da mesma cidade (por exemplo, data centers cujos nomes compartilham as três primeiras letras, como DALxx). É possível usar a interface de API para incluir instâncias de cálculo de qualquer data center remoto, no entanto. 
 
-## Qual versão do TLS é suportada com transferência de SSL? Quais cifras são suportadas?
+## Qual versão do TLS é suportada com transferência de SSL?
 
 O Cloud Load Balancer Service suporta o TLS 1.2 com finalização de SSL. 
 
 A lista a seguir detalha as cifras suportadas (listadas em ordem de precedência):  
 
-* ECDHE-RSA-AES256-GCM-SHA384 
-* ECDHE-RSA-AES256-SHA384 
-* DHE-RSA-AES256-GCM-SHA384 
-* DHE-RSA-AES256-SHA256 
-* AES256-GCM-SHA384 
-* AES256-SHA256 
-* ECDHE-RSA-AES128-GCM-SHA256 
-* ECDHE-RSA-AES128-SHA256 
-* DHE-RSA-AES128-GCM-SHA256 
-* DHE-RSA-AES128-SHA256 
-* AES128-GCM-SHA256 
-* AES128-SHA256 
-
-## Posso customizar minha lista de cifras SSL?
-
-Não no momento.
+* ECDHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-AES256-SHA384
+* AES256-GCM-SHA384
+* AES256-SHA256
+* ECDHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES128-SHA256
+* AES128-GCM-SHA256
+* AES128-SHA256
 
 ## Qual é o número máximo de instâncias do serviço Load Balancer que posso criar dentro de minha conta? 
 
-Atualmente, é possível criar até 20 instâncias de serviço. Se precisar de mais instâncias, entre em contato com o Suporte IBM. 
+Atualmente, é possível criar até 20 instâncias de serviço. Se você precisar de mais instâncias, entre em contato com o Suporte IBM. 
 
-## O Load Balancer as a Service pode ser usado com o VMWare? 
+## O serviço IBM Cloud Load Balancer pode ser usado com o VMWare? 
 
-Os endereços privados móveis do SoftLayer designados pelas máquinas virtuais VMware podem ser especificados como servidores de backend para o balanceador de carga. Esse recurso está disponível atualmente apenas por meio da API, não da UI da Web (GUI). Os IPs privados móveis incluídos por meio da API aparecerão como "Desconhecido" na GUI, pois eles não são designados pelo SoftLayer. Observe que esse tipo de configuração pode ser usado com outros hypervisors, como Xen e KVM também.
+As máquinas virtuais VMWare designadas a endereços privados móveis do SoftLayer podem ser especificadas como servidores de backend para o balanceador de carga. Esse recurso está atualmente disponível apenas usando a API e não a IU da web (GUI). Os IPs privados móveis incluídos usando a API aparecem como "Desconhecido" na GUI, uma vez que eles não são designados pelo SoftLayer. Observe que esse tipo de configuração pode ser usado com outros hypervisors, como Xen e KVM também.
 
-Os endereços não SoftLayer designados pelas máquinas virtuais VMware (como com redes VMware NSX) não podem ser incluídos diretamente como servidores de
-backend no balanceador de carga. No entanto, dependendo de sua configuração, pode ser possível configurar um intermediário, tal como um gateway NSX, que tenha um endereço privado do SoftLayer como o servidor de backend para o balanceador de carga (com os servidores reais sendo VMs conectadas às redes gerenciadas pelo VMware NSX).
+As máquinas virtuais VMWare designadas a endereços não do SoftLayer (como redes VMWare NSX) não podem ser incluídas diretamente como servidores de backend no balanceador de carga. Entretanto, dependendo de sua configuração, talvez seja possível configurar um intermediário, como um gateway NSX, que tenha um endereço privado do SoftLayer como o servidor de backend para o balanceador de carga (com os servidores reais sendo VMs conectados à(s) rede(s) gerenciada(s) pelo VMware NSX).
 
 ## Se eu optar por usar uma VLAN pública sob minha conta para implementar meu balanceador de carga e tiver um firewall implementado em minha VLAN pública, quais configurações serão necessárias em meu firewall para trabalhar com meu serviço de balanceador de carga?
 
-A porta TCP 56501 é usada para gerenciamento. Assegure-se de que o tráfego para essa porta, bem como para as portas de seu aplicativo, não seja bloqueado por seu firewall, caso contrário, o fornecimento do balanceador de carga falhará.
+A porta TCP 56501 é usada para gerenciamento. Assegure-se de que o tráfego para essa porta e as portas do seu aplicativo não sejam bloqueados por seu firewall, caso contrário, o fornecimento do balanceador de carga falhará.
 
+## O que eu preciso fazer quando recebo um erro "Esta conta do SoftLayer não está vinculada a nenhuma conta do Bluemix"?
+
+Assegure-se de que sua conta do SoftLayer esteja vinculada à sua conta do Bluemix. Consulte o [Link do Softlayer](https://console.bluemix.net/docs/account/softlayerlink.html#switching-to-ibmid) para obter mais instruções.

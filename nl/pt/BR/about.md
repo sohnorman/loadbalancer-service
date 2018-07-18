@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -21,22 +21,28 @@ O serviço IBM Cloud Load Balancer ajuda os clientes a melhorarem a disponibilid
 ## Visão geral de recursos
 O IBM Cloud Load Balancer Service oferece os recursos a seguir:
 
-* Balanceador de carga público (voltado à Internet)
-	* Serviço publicamente acessível por meio de seu nome completo do domínio
+* Balanceador de carga público (voltado para a Internet)
+	* Serviço publicamente acessível por meio de seu nome completo do domínio (FQDN)
+	* Instâncias do servidor de backend em sub-redes privadas
+* Balanceador de carga interno
+	* Serviço acessível de modo privado por meio de seu nome completo do domínio (FQDN)
+	* As solicitações do cliente são roteadas por meio da rede privada
 	* Instâncias do servidor de backend em sub-redes privadas
 * Balanceamento de carga básico
-	* Distribuição de tráfego com base em informações da porta do aplicativo da camada 4
-	* Suporte para os aplicativos baseados em HTTP, HTTPS e TCP 
+	* Distribuição de tráfego com base nas informações da porta do aplicativo Layer-4
+	* Suporte para aplicativos baseados em HTTP, HTTPS e TCP 
 	* Variedade de métodos de balanceamento de carga, como round-robin (RR), round-robin ponderado e menos conexões
-	* Balanceamento de carga entre o servidor virtual e as instâncias de cálculo bare metal que residem localmente no data center
+	* Balanceamento de carga entre servidor virtual e instâncias de cálculo bare metal que residem localmente em um data center
 * Verificações de funcionamento do servidor
 	* Monitoramento periódico de funcionamento do servidor para assegurar que o tráfego seja encaminhado apenas para servidores funcionais 
-	* Verificações de funcionamento da camada 4 para portas TCP e verificações de funcionamento da camada 7 para a porta HTTP 
+	* Verificações de funcionamento de Layer-4 para portas TCP e verificações de funcionamento de Layer-7 para porta HTTP 
 * Transferência de SSL
-	* Finalização de tráfego SSL (HTTPS) recebido com comunicação HTTP de texto sem formatação com servidores de backend
+	* Encerramento de tráfego SSL (HTTPS) recebido usando comunicação HTTP de texto sem formatação com servidores de backend
 * Gerenciamento de tráfego avançado
 	* Permanência do cliente (persistência de sessão)
 	* Máximo de conexões por porta virtual
 * Fácil gerenciamento usando a interface gráfica intuitiva e a API
 * Confiabilidade integrada 
 * Definição de preço por utilização 
+* Monitoramento
+    * Monitora as métricas de Rendimento, Conexões ativas e Taxa de conexão para protocolos HTTP, HTTPS e TCP sobre intervalos de tempo especificados pelo usuário. Consulte [Monitorando métricas](monitoring-metrics.html) para obter detalhes adicionais.

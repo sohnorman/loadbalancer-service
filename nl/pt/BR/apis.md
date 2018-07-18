@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,11 +19,9 @@ O SoftLayer® Application Programming Interface (API) é a interface de desenvol
 direta com o sistema backend do SoftLayer. 
 {:shortdesc}
 
-O SoftLayer API (SLAPI) impulsiona muitos dos recursos no Portal do cliente, que
-geralmente significa que se uma interação for possível no Portal do cliente, ela também poderá ser executada na API. Como é possível interagir programaticamente
-com todas as partes do ambiente do SoftLayer dentro da API, é possível usar a API para automatizar tarefas.
+A SoftLayer API (SLAPI) alimenta muitos dos recursos no Portal do cliente. Geralmente, se uma interação é possível no Portal do cliente, ela também pode ser executada na API. Logo, como é possível interagir programaticamente com todas as partes do ambiente do SoftLayer dentro da API, é possível usar a API para automatizar tarefas.
 
-O SoftLayer API é um sistema de Chamada de Procedimento Remoto. Cada chamada envolve o envio de dados para um terminal de API e o recebimento de dados estruturados
+A SoftLayer API (SLAPI) é um sistema de Chamada de Procedimento Remoto. Cada chamada envolve o envio de dados para um terminal de API e o recebimento de dados estruturados
 em retorno. O formato usado para enviar e receber dados com o SLAPI depende da implementação da API que for escolhida. O SLAPI
 atualmente usa SOAP, XML-RPC ou REST para a transmissão de dados. 
 
@@ -35,10 +33,11 @@ Para obter mais informações sobre o SoftLayer API, APIs do IBM Cloud Load Bala
 * [API SoftLayer_Network_LBaaS_Listener ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Listener){: new_window}
 * [API SoftLayer_Network_LBaaS_Member ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
 * [API SoftLayer_Network_LBaaS_HealthMonitor ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
+* [API SoftLayer_Network_LBaaS_SSLCipher![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_SSLCipher){: new_window}
 
 Os exemplos a seguir estão usando Python com o cliente SOAP zeep.
 
-## Exemplo de criação de balanceador de carga
+## Criando um balanceador de carga
 ### Recuperar ID do pacote e preço do item do produto
 ```
 from zeep import Client, xsd
@@ -161,10 +160,13 @@ orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
     useHourlyPricing=True,      # Required since LBaaS is an hourly service
-    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
-                                # balancer public IPs from an IBM system pool,
-                                # otherwise "False" from the public VLAN
-                                # under your account
+    useSystemPublicIpPool=True, # Optional - Default is "True" to allocate load balancer public IPs 
+                                # from an IBM system pool, otherwise "False" from the public VLAN
+                                # under your account. useSystemPublicIpPool is only applicable to
+                                # public load balancers
+    isPublic=True               # Optional - Default is "True" to create a public load balancer.
+                                # isPublic distinguishes between public ("True") and
+                                # internal ("False") load balanacer
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::verifyOrder API
@@ -232,10 +234,13 @@ orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
     useHourlyPricing=True,      # Required since LBaaS is an hourly service
-    useSystemPublicIpPool=True  # Optional - Default is "True" to allocate load
-                                # balancer public IPs from an IBM system pool,
-                                # otherwise "False" from the public VLAN
-                                # under your account
+    useSystemPublicIpPool=True, # Optional - Default is "True" to allocate load balancer public IPs 
+                                # from an IBM system pool, otherwise "False" from the public VLAN
+                                # under your account. useSystemPublicIpPool is only applicable to
+                                # public load balancers
+    isPublic=True               # Optional - Default is "True" to create a public load balancer.
+                                # isPublic distinguishes between public ("True") and
+                                # internal ("False") load balanacer
 )
 
 # Make SLAPI call to SoftLayer_Product_Order::placeOrder API
@@ -253,7 +258,7 @@ except Fault as exp:
 ```
 {: codeblock}
 
-## Exemplo de obtenção de balanceadores de carga
+## Recuperando detalhes sobre balanceadores de carga
 ### Listar todos os balanceadores de carga
 ```
 from zeep import Client
@@ -327,7 +332,7 @@ print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
 {: codeblock}
 
-## Exemplo de atualização de um balanceador de carga
+## Atualizando um balanceador de carga
 ### Incluir um membro
 ```
 from zeep import Client, xsd 
@@ -439,8 +444,7 @@ print listeners
 ```
 {: codeblock}
 
-## Exemplo de cancelamento de um balanceador de carga
-### Cancelar um balanceador de carga
+## Cancelando um balanceador de carga
 ```
 from zeep import Client, xsd 
 from zeep.exceptions import Fault
@@ -481,3 +485,98 @@ except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
 {: codeblock}
+
+## Visualizando métricas de monitoramento de balanceadores de carga
+### Obter rendimento de tráfego HTTP
+```
+from zeep import Client
+
+# Username and apikey SLAPI call
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID of load balancer
+uuid = '<Your load balancer UUID>'
+# The name of the metric. 
+# Options are Throughput, ActiveConnections, and ConnectionRate
+nameOfMetric = 'Throughput'
+# The time interval over which the metric is to be measured
+# Options are 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '1hour' 
+# UUID of the protocol whose throughput your requesting
+protocolUuid = '<UUID of the protocol>'
+
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD for authentication
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# Create XSD value objects
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Retrieve throughput of hhtp traffic for a specific load balancer object
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval,
+        listenerUuid=protocolUuid
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```
+{: codeblock}
+
+### Obtenha o rendimento de um balanceador de carga
+```
+from zeep import Client, xsd 
+
+# Username and apikey SLAPI call
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID of load balancer
+uuid = '<Your load balancer UUID>'
+# The name of the metric. 
+# Options are Throughput, ActiveConnections, and ConnectionRate
+nameOfMetric = 'Throughput'
+# The time interval over which the metric is to be measured
+# Options are 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '6hours' 
+# If no protocol is specified the throughput of all protocols is returned.
+# protocolUuid = '<UUID of the protocol>'
+
+# WSDL for SoftLayer_Network_LBaaS_LoadBalancer API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD for authentication
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# Create XSD value objects
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Retrieve throughput of hhtp traffic for a specific load balancer object
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```

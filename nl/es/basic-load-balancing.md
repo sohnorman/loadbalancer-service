@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,11 +18,20 @@ lastupdated: "2017-08-21"
 El servicio del equilibrador de carga de IBM Cloud distribuye el tráfico entre varias instancias de servidor (desde el servidor nativo y el servidor virtual) residentes en el sistema local, dentro del mismo centro de datos. 
 
 ## Equilibrador de carga pública 
-Se asigna un nombre de dominio totalmente calificado y de acceso público a la instancia de servicio del equilibrador de carga. Debe utilizar este nombre de dominio para acceder a las aplicaciones alojadas detrás del servicio del equilibrador de carga. Este nombre de dominio se puede registrar con una o más direcciones IP. Las direcciones IP y el número de direcciones IP puede cambiar con el tiempo, en función de las actividades de mantenimiento y escalado, que son transparentes para los usuarios finales. Las instancias de cálculo de back-end que alojan la aplicación deben estar en una red privada de IBM Cloud. 
+Se asigna un nombre de dominio totalmente calificado y de acceso público a la instancia de servicio del equilibrador de carga. Debe utilizar este nombre de dominio para acceder a las aplicaciones alojadas detrás del servicio del equilibrador de carga. Este nombre de dominio se puede registrar con una o más direcciones IP públicas. Las direcciones IP públicas y el número de direcciones IP públicas puede cambiar con el tiempo, en función de las actividades de mantenimiento y escalado, que son transparentes para los usuarios finales. Las instancias de cálculo de back-end que alojan la aplicación deben estar en una red privada de IBM Cloud. 
 
 **NOTA:** Se recomienda, como buena práctica, que se suministren los servidores back-end solo para uso privado a menos que necesiten conectividad pública directa. Esta práctica mejora la seguridad y protege su dirección IP pública. Las aplicaciones alojadas en estos servidores back-end siguen siendo accesibles a través de la red pública mediante el uso del equilibrador de carga.  
 
 Puede elegir asignar direcciones IP públicas del equilibrador de carga desde una agrupación de sistemas de IBM (predeterminado) o una VLAN pública bajo su cuenta al crear la instancia de servicio del equilibrador de carga.
+
+## Equilibrador de carga interno
+El equilibrador de carga interno sólo es accesible dentro de la red privada de IBM Cloud. 
+
+Al igual que un equilibrador de carga público, también se asigna un nombre de dominio completo a la instancia de servicio del equilibrador de carga interno. Sin embargo, este nombre de dominio se registra con una o varias direcciones IP privadas. 
+
+De forma similar a un equilibrador de carga público, las direcciones IP privadas y sus números pueden cambiar con el tiempo en función de las actividades de mantenimiento y de escalado, que son transparentes para los usuarios finales. 
+
+**NOTA:** Las instancias de cálculo de back-end que alojan la aplicación también deben estar en la red privada de IBM Cloud.
 
 ## Puertos/Protocolos de aplicaciones frontales y back-end
 Puede definir hasta diez puertos (protocolos) de aplicación frontal y asignarlos a sus puertos (protocolos) respectivos en los servidores de aplicaciones back-end. El nombre de dominio totalmente calificado asignado a la instancia de servicio del equilibrador de carga y los puertos de la aplicación frontal están expuestos al mundo exterior. Las solicitudes de usuario entrantes se reciben en estos puertos. 

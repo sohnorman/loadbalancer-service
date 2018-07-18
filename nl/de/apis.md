@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,9 +18,9 @@ lastupdated: "2017-08-21"
 Die API (Application Programming Interface) von SoftLayer® ist die Entwicklungsschnittstelle, die Entwicklern und Systemadministratoren die direkte Interaktion mit dem SoftLayer-Back-End-System ermöglicht. 
 {:shortdesc}
 
-Die SoftLayer-API (SLAPI) unterstützt viele Funktionen im Kundenportal; dies bedeutet in der Regel, dass eine Interaktion, die im Kundenportal möglich ist, auch in der API ausgeführt werden kann. Da Sie mit allen Teilen der SoftLayer-Umgebung in der API programmgesteuert interagieren können, können Sie die API zum Automatisieren von Tasks verwenden.
+Die SoftLayer-API (SLAPI) unterstützt viele Funktionen im Kundenportal. Im Allgemeinen kann eine Interaktion, die im Kundenportal möglich ist, auch in der API ausgeführt werden. Da Sie mit allen Teilen der SoftLayer-Umgebung in der API programmgesteuert interagieren können, können Sie die API zum Automatisieren von Tasks verwenden.
 
-Die SoftLayer-API ist ein Remote Procedure Call-System. Bei jedem Aufruf werden Daten zum API-Endpunkt gesendet und anschließend strukturierte Daten empfangen. Welches Format zum Senden und Empfangen der Daten mit der SLAPI verwendet wird, hängt von der jeweils ausgewählten Implementierung der API ab. Von der SLAPI werden derzeit SOAP, XML-RPC und REST für die Datenübertragung verwendet. 
+Die SoftLayer-API (SLAPI) ist ein Remote Procedure Call-System. Bei jedem Aufruf werden Daten zum API-Endpunkt gesendet und anschließend strukturierte Daten empfangen. Welches Format zum Senden und Empfangen der Daten mit der SLAPI verwendet wird, hängt von der jeweils ausgewählten Implementierung der API ab. Von der SLAPI werden derzeit SOAP, XML-RPC und REST für die Datenübertragung verwendet. 
 
 Weitere Informationen zur SoftLayer-API und zu den IBM Cloud Load Balancer Service-APIs finden Sie in den folgenden Ressourcen
 im SoftLayer Development Network:
@@ -31,10 +31,11 @@ im SoftLayer Development Network:
 * [SoftLayer_Network_LBaaS_Listener-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Listener){: new_window}
 * [SoftLayer_Network_LBaaS_Member-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_Member){: new_window}
 * [SoftLayer_Network_LBaaS_HealthMonitor-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_HealthMonitor){: new_window}
+* [SoftLayer_Network_LBaaS_SSLCipher-API ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](http://sldn.softlayer.com/reference/services/SoftLayer_Network_LBaaS_SSLCipher){: new_window}
 
 In den folgenden Beispielen wird Python mit einem Zeep-SOAP-Client verwendet.
 
-## Beispiel für das Erstellen einer Lastausgleichsfunktion
+## Lastausgleichsfunktion erstellen
 ### Produktpaket-ID und Artikelpreis abrufen
 ```
 from zeep import Client, xsd
@@ -156,11 +157,14 @@ userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
-    useHourlyPricing=True,      # Erforderlich, da LBaaS ein auf Stundenintervallen basierender Service ist
-    useSystemPublicIpPool=True  # Optional - Standardwert ist "True" für die Zuordnung von öffentlichen
-                                # IPs für die Lastausgleichsfunktion aus einem IBM Systempool,
-                                # andernfalls "False" für die Zuordnung aus dem öffentlichen VLAN
-                                # unter Ihrem Konto
+    useHourlyPricing=True,      # Erforderlich, da LBaaS ein stündlicher Service ist
+    useSystemPublicIpPool=True, # Optional - Standardwert ist "True" zum Zuordnen der öffentlichen IPs der Lastausgleichsfunktion
+                                # von einem IBM Systempool, andernfalls "False" vom öffentlichen VLAN
+                                # in Ihrem Konto. useSystemPublicIpPool ist nur anwendbar auf
+                                # öffentliche Lastausgleichsfunktionen
+    isPublic=True               # Optional - Standardwert ist "True" zum Erstellen einer öffentlichen Lastausgleichsfunktion
+                                # isPublic unterscheidet zwischen öffentlicher ("True") und
+                                # interner ("False") Lastausgleichsfunktion
 )
 
 # SLAPI-Aufruf an SoftLayer_Product_Order::verifyOrder-API ausführen
@@ -227,11 +231,14 @@ userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
 orderDataValue = orderDataType(
     name=name, packageId=lbaasPackageId, prices=lbaasItemPrices,
     subnets=subnets, protocolConfigurations=protocolConfigurations,
-    useHourlyPricing=True,      # Erforderlich, da LBaaS ein auf Stundenintervallen basierender Service ist
-    useSystemPublicIpPool=True  # Optional - Standardwert ist "True" für die Zuordnung von öffentlichen
-                                # IPs für die Lastausgleichsfunktion aus einem IBM Systempool,
-                                # andernfalls "False" für die Zuordnung aus dem öffentlichen VLAN
-                                # unter Ihrem Konto
+    useHourlyPricing=True,      # Erforderlich, da LBaaS ein stündlicher Service ist
+    useSystemPublicIpPool=True, # Optional - Standardwert ist "True" zum Zuordnen der öffentlichen IPs der Lastausgleichsfunktion
+                                # von einem IBM Systempool, andernfalls "False" vom öffentlichen VLAN
+                                # in Ihrem Konto. useSystemPublicIpPool ist nur anwendbar auf
+                                # öffentliche Lastausgleichsfunktionen
+    isPublic=True               # Optional - Standardwert ist "True" zum Erstellen einer öffentlichen Lastausgleichsfunktion
+                                # isPublic unterscheidet zwischen öffentlicher ("True") und
+                                # interner ("False") Lastausgleichsfunktion
 )
 
 # SLAPI-Aufruf für SoftLayer_Product_Order::placeOrder-API ausführen
@@ -249,7 +256,7 @@ except Fault as exp:
 ```
 {: codeblock}
 
-## Beispiel für das Abrufen von Lastausgleichsfunktionen
+## Details der Lastausgleichsfunktionen abrufen
 ### Alle Lastausgleichsfunktionen auflisten
 ```
 from zeep import Client
@@ -323,7 +330,7 @@ print 'HealthMonitors: %s\r\n' % loadbalancer.healthMonitors
 ```
 {: codeblock}
 
-## Beispiel für das Aktualisieren einer Lastausgleichsfunktion
+## Lastausgleichsfunktion aktualisieren
 ### Mitglied hinzufügen
 ```
 from zeep import Client, xsd 
@@ -435,8 +442,7 @@ print listeners
 ```
 {: codeblock}
 
-## Beispiel für das Abbrechen einer Lastausgleichsfunktion
-### Lastausgleichsfunktion abbrechen
+## Lastausgleichsfunktion abbrechen
 ```
 from zeep import Client, xsd
 from zeep.exceptions import Fault
@@ -477,3 +483,98 @@ except Fault as exp:
     print 'Failed to cancel load balancer:\r\n>>> %s' % exp
 ```
 {: codeblock}
+
+## Überwachungsmetriken von Lastausgleichsfunktionen anzeigen
+### Durchsatz des HTTP-Datenverkehrs abrufen
+```
+from zeep import Client
+
+# Benutzername und API-Schlüssel für SLAPI-Aufruf
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID der Lastausgleichsfunktion
+uuid = '<Your load balancer UUID>'
+# Der Name der Metrik.
+# Optionen sind Throughput, ActiveConnections und ConnectionRate
+nameOfMetric = 'Throughput'
+# Das Zeitintervall, mit dem die Metrik gemessen werden soll
+# Optionen sind 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '1hour'
+# UUID des Protokolls, dessen Durchsatz Sie anfordern
+protocolUuid = '<UUID of the protocol>'
+
+# WSDL für SoftLayer_Network_LBaaS_LoadBalancer-API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD für Authentifizierung
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# XSD-Wertobjekte erstellen
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Durchsatz des HTTP-Verkehrs für ein bestimmtes Objekt einer Lastausgleichsfunktion
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval,
+        listenerUuid=protocolUuid
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```
+{: codeblock}
+
+### Durchsatz einer Lastausgleichsfunktion abrufen
+```
+from zeep import Client, xsd 
+
+# Benutzername und API-Schlüssel für SLAPI-Aufruf
+username = '<Your username>'
+apiKey = '<Your apiKey>'
+# UUID der Lastausgleichsfunktion
+uuid = '<Your load balancer UUID>'
+# Der Name der Metrik.
+# Optionen sind Throughput, ActiveConnections und ConnectionRate
+nameOfMetric = 'Throughput'
+# Das Zeitintervall, mit dem die Metrik gemessen werden soll
+# Optionen sind 1hour, 6hours, 12hours, 24hour, 1week, and 2weeks
+timeInterval = '6hours'
+# Falls kein Protokoll angegeben ist, wird der Durchsatz aller Protokolle zurückgegeben.
+# protocolUuid = '<UUID des Protokolls>'
+
+# WSDL für SoftLayer_Network_LBaaS_LoadBalancer-API
+wsdl = 'https://api.softlayer.com/soap/v3.1/SoftLayer_Network_LBaaS_LoadBalancer?wsdl'
+client = Client(wsdl)
+
+# XSD für Authentifizierung
+xsdUserAuth = xsd.Element(
+    '{http://api.softlayer.com/soap/v3/}authenticate',
+    xsd.ComplexType([
+        xsd.Element('{http://api.softlayer.com/soap/v3/}username', xsd.String()),
+        xsd.Element('{http://api.softlayer.com/soap/v3/}apiKey', xsd.String())
+    ])  
+)
+
+# XSD-Wertobjekte erstellen
+userAuthValue = xsdUserAuth(username=username, apiKey=apiKey)
+
+# Durchsatz des HTTP-Verkehrs für ein bestimmtes Objekt einer Lastausgleichsfunktion
+timeSeriesDataValues = client.service.getListenerTimeSeriesData(
+        _soapheaders=[userAuthValue],
+        loadBalancerUuid=uuid,
+        metricName=nameOfMetric,
+        timeRange=timeInterval
+)
+for timeSeriesDataValue in timeSeriesDataValues:
+    print 'EpochTimeStamp: %d' % timeSeriesDataValue.epochTimestamp
+    print 'Value: %f' % timeSeriesDataValue.value
+```

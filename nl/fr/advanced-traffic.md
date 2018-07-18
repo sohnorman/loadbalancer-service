@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -15,7 +15,7 @@ lastupdated: "2017-08-21"
 {:download: .download}
 
 # Gestion de trafic avancée
-Cette section présente les différentes fonctionnalités de gestion de trafic avancée disponibles dans le service d'équilibrage de charge.
+Cette section présente les différentes fonctionnalités de gestion de trafic avancée disponibles dans le service Equilibreur de charge.
 
 ## Nombre max. de connexions
 

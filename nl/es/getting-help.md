@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2017
-lastupdated: "2017-08-21"
+  years: 2017,2018
+lastupdated: "2018-03-14"
 
 ---
 
@@ -18,11 +18,10 @@ lastupdated: "2017-08-21"
 
 Si tiene problemas o preguntas sobre el uso del servicio IBM Cloud Load Balancer, puede obtener ayuda buscando información o planteando preguntas a través de uno de los foros listados a continuación. También puede abrir una incidencia de soporte.
 
-Al utilizar los foros para formular una pregunta, etiquete la pregunta para que la vea el equipo de desarrollo de IBM Cloud. 
+Al utilizar los foros para formular una pregunta, etiquete la pregunta para que la vea el equipo de desarrollo de IBM Cloud.
 
-* Si tiene preguntas técnicas sobre el servicio IBM Cloud Load Balancer, publique la pregunta en [Stack Overflow](https://stackoverflow.com/search?q=lbaas+ibm-bluemix) y añada las etiquetas "lbaas" e "ibm-bluemix".
-* Para preguntas sobre el servicio e instrucciones sobre cómo empezar, utilice el foro
-[IBM developerWorks dW Answers](https://developer.ibm.com/answers/topics/lbaas.html?smartspace=bluemix). Añada las etiquetas "lbaas" y "bluemix".
+* Si tiene preguntas técnicas sobre el servicio IBM Cloud Load Balancer, publique la pregunta en [Stack Overflow](https://stackoverflow.com/search?q=lbaas+ibm-cloud) y añada las etiquetas "lbaas" e "ibm-cloud".
+* Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM developerWorks dW Answers](https://developer.ibm.com/answers/topics/lbaas.html?smartspace=ibm-cloud). Añada las etiquetas "lbaas" e "ibm-cloud".
 
 Consulte [Obtención de ayuda](https://console.bluemix.net/docs/support/index.html#getting-help) para obtener más detalles sobre el uso de los foros.
 

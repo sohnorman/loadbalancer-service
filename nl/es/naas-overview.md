@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2018-01-08"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-01-08"
 # Demo: Red como servicio
 {: #naas-video}
 
-Los servicios de red de IBM Cloud, incluyendo los equilibradores de carga, los grupos de seguridad y CDN, facilitan la creación de aplicaciones nativas en la nube con una mayor seguridad, rendimiento y resiliencia. En esta demostración, aprenderá cómo utilizar estos servicios para crear una aplicación web simple de tres capas en tan solo unos clics.
+Los servicios de red de IBM Cloud, incluyendo los equilibradores de carga, los grupos de seguridad y CDN, facilitan la creación de aplicaciones nativas en la nube con una mayor seguridad, rendimiento y resiliencia. En esta demostración, aprenderá cómo utilizar estos servicios para crear una app web simple de tres capas en tan solo unos clics.
 
 <p>
   <div class="embed-responsive embed-responsive-16by9">

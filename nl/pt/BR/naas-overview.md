@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2018-01-08"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-01-08"
 # Demo: rede como um serviço
 {: #naas-video}
 
-Os serviços IBM Cloud Network, incluindo Balanceadores de Carga, Grupos de Segurança e CDN facilitam a construção de aplicativos de nuvem nativa com maior segurança, desempenho e resiliência. Nessa demo, você aprenderá como é possível usar esses serviços para criar um app da web de três camadas simples em uma questão de cliques.
+Os serviços IBM Cloud Network, incluindo Load Balancers, Grupos de Segurança e CDN facilitam a construção de aplicativos de nuvem nativa com maior segurança, desempenho e resiliência. Nessa demo, você aprenderá como é possível usar esses serviços para criar um app da web de três camadas simples em uma questão de cliques.
 
 <p>
   <div class="embed-responsive embed-responsive-16by9">

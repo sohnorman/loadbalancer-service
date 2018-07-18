@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-04-13"
 
 ---
 
@@ -16,8 +16,18 @@ lastupdated: "2017-08-21"
 
 
 # Einführung
+Für den Einstieg in die Verwendung von IBM Cloud Load Balancer benötigen Sie zwei Dinge:
 
-Wählen Sie für den Einstieg in den IBM Cloud Load Balancer-Service **Netz > Lastausgleichsfunktionen > IBM Cloud Load Balancer** im Cloud-Katalog aus und führen Sie anschließend die folgende Prozedur aus:
+* Ein Konto bei IBM: [IBMid](https://www.ibm.com/account/us-en/signup/register.html)
+* Einen IBM Server, entweder einen [Bare-Metal-Server](https://console.bluemix.net/docs/bare-metal/about.html#getting-started-with-bare-metal-servers) oder eine [virtuelle Serverinstanz (VSI)](https://console.bluemix.net/docs/vsi/vsi_index.html#getting-started-with-virtual-servers).
+ 
+Falls Sie Unterstützung bei der Beschaffung eines Kontos mit **IBMid** benötigen, setzen Sie sich mit Ihrem [IBM Vertriebsbeauftragten](https://www.ibm.com/cloud-computing/bluemix/contact-us) in Verbindung.
+
+Falls Sie bereits über ein vorhandenes Konto für die IBM Cloud-Infrastruktur (SoftLayer) verfügen, können Sie Ihre IBMid [mit Ihrem Konto verknüpfen](https://console.bluemix.net/docs/account/softlayerlink.html#unifyingaccounts). 
+
+## Lastausgleichsfunktion bestellen
+
+Wählen Sie zum Bestellen des IBM Cloud Load Balancer-Service **Netz > Lastausgleichsfunktionen > IBM Cloud Load Balancer** im [IBM Cloud-Katalog](https://console.bluemix.net/catalog/infrastructure/load-balancer-group) aus. Melden Sie sich an oder erstellen Sie ein neues Konto, und führen Sie anschließend die folgende Prozedur aus:
 
 1. Wählen Sie Ihr Rechenzentrum aus und überprüfen Sie den Serviceplan. Klicken Sie auf **Weiter**.
 2. Wählen Sie das Teilnetz aus, für das Sie die Lastausgleichsfunktion bereitstellen möchten. Die Instanz des Service für die Lastausgleichsfunktion verfügt über eine der Netzschnittstellen in diesem Teilnetz. Stellen Sie sicher, dass die Anwendungsserver entweder in diesem Teilnetz oder aus diesem Teilnetz erreichbar sind. Aktivieren Sie bei Bedarf das VLAN-Spanning. Klicken Sie auf **Weiter**.

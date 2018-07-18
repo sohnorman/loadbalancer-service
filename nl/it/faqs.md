@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-11-02"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2017-11-02"
 
 # FAQ
 
-Questa sezione contiene le risposte ad alcune domande frequenti sul servizio IBM Cloud Load Balancer.
+Questa sezione contiene le risposte ad alcune domande frequenti sul servizio IBM Cloud Load Balancer. 
 
 ## Quante opzioni di bilanciamento del carico sono disponibili in {{site.data.keyword.BluSoftlayer_notm}}?
 
@@ -34,58 +34,49 @@ Mentre si tenta di creare un nuovo servizio del programma di bilanciamento del c
 
 50.
 
-## Posso creare un programma di bilanciamento del carico privato e soltanto interno a cui è possibile accedere soltanto dai client interni?  
-
-Non in questo momento. Il servizio ospitato sul programma di bilanciamento del carico IBM Cloud sarà assegnato a tutti i nomi dominio completi accessibili pubblicamente da internet. 
-
 ## Quali sono le impostazioni predefinite e i valori consentiti per i vari parametri del controllo di integrità?
 
 Le impostazioni predefinite e i valori consentiti sono elencati di seguito:
 
 * **Intervallo controllo di integrità:** il valore predefinito è 5 secondi, l'intervallo è 2 – 60 secondi
 * **Timeout risposta controllo di integrità:** il valore predefinito è 2 secondi, l'intervallo è 1 – 59 secondi
-* **Numero massimo nuovi tentativi:** il valore predefinito è 2 nuovi tentativi, l'intervallo è compreso tra 1 e 10
+* **Numero massimo di tentativi:** il valore predefinito di tentativi è 2 e l'intervallo è da 1 a 10 tentativi
 
-**Nota:** il valore del timeout della risposta del controllo di integrità deve sempre essere inferiore al valore dell'intervallo del controllo di integrità. 
+**NOTA:** il valore del timeout della risposta del controllo di integrità deve sempre essere inferiore al valore dell'intervallo del controllo di integrità. 
 
 ## Posso utilizzare le istanze di calcolo che risiedono nei data center remoti con questo servizio? 
 
-Ti raccomandiamo che il tuo servizio del programma di bilanciamento del carico e le tue istanze di calcolo risiedano localmente nello stesso data center. La GUI (graphical interface) del servizio del programma di bilanciamento del carico non visualizzerà le istanze di calcolo da altri data center remoti. Tuttavia, la GUI includerà le istanze di calcolo da altri data center nella stessa città (ad esempio, i data center i cui nomi condividono le prime tre lettere come DALxx. Puoi comunque utilizzare l'interfaccia API per aggiungere le istanze di calcolo da qualsiasi data center remoto. 
+Ti raccomandiamo che il tuo servizio del programma di bilanciamento del carico e le tue istanze di calcolo risiedano localmente nello stesso data center. La GUI (graphical interface) del servizio del programma di bilanciamento del carico non visualizzerà le istanze di calcolo da altri data center remoti. Tuttavia, la GUI includerà le istanze di calcolo da altri data center nella stessa città (ad esempio, i data center i cui nomi condividono le prime tre lettere come DALxx). Puoi comunque utilizzare l'interfaccia API per aggiungere le istanze di calcolo da qualsiasi data center remoto.  
 
-## Quale versione TLS è supportata con l'offload SSL? Quali cipher sono supportati?
+## Quale versione TLS è supportata con l'offload SSL?
 
 Il servizio Cloud Load Balancer supporta TLS 1.2 con terminazione SSL. 
 
 Il seguente elenco mostra i cipher supportati (elencati in ordine di precedenza):  
 
-* ECDHE-RSA-AES256-GCM-SHA384 
-* ECDHE-RSA-AES256-SHA384 
-* DHE-RSA-AES256-GCM-SHA384 
-* DHE-RSA-AES256-SHA256 
-* AES256-GCM-SHA384 
-* AES256-SHA256 
-* ECDHE-RSA-AES128-GCM-SHA256 
-* ECDHE-RSA-AES128-SHA256 
-* DHE-RSA-AES128-GCM-SHA256 
-* DHE-RSA-AES128-SHA256 
-* AES128-GCM-SHA256 
-* AES128-SHA256 
-
-## Posso personalizzare il mio elenco di cipher SSL?
-
-Non in questo momento.
+* ECDHE-RSA-AES256-GCM-SHA384
+* ECDHE-RSA-AES256-SHA384
+* AES256-GCM-SHA384
+* AES256-SHA256
+* ECDHE-RSA-AES128-GCM-SHA256
+* ECDHE-RSA-AES128-SHA256
+* AES128-GCM-SHA256
+* AES128-SHA256
 
 ## Qual'è il numero massimo di istanze del servizio Load Balancer che posso creare nel mio account? 
 
-Al momento, puoi creare fino a 20 istanze del servizio. Se hai bisogno di più istanze, contatta il supporto IBM. 
+Al momento, puoi creare fino a 20 istanze del servizio. Se hai bisogno di più istanze, contatta il supporto IBM.  
 
-## Può LBaaS (Load Balancer as a Service) essere utilizzato con VMWare? 
+## Il servizio IBM Cloud Load Balancer può essere utilizzato con VMWare? 
 
-Le macchine virtuali VMware assegnate agli indirizzi privati portatili SoftLayer possono essere specificate come server di backend al programma di bilanciamento del carico. Questa funzione è al momento disponibile solo tramite l'API e non la IU web (GUI). Gli IP privati portatili aggiunti tramite l'API vengono visualizzati come "Sconosciuti" nella GUI, poiché non sono assegnati da SoftLayer. Tieni presente che questo tipo di configurazione può essere utilizzato anche con altri hypervisor come Xen e KVM.
+Le macchine virtuali VMWare assegnate agli indirizzi privati portatili SoftLayer possono essere specificate come server di backend al programma di bilanciamento del carico. Questa funzione è al momento disponibile solo utilizzando l'API e non la IU web (GUI). Gli IP privati portatili aggiunti utilizzando l'API vengono visualizzati come "Sconosciuti" nella GUI, poiché non sono assegnati da SoftLayer. Tieni presente che questo tipo di configurazione può essere utilizzato anche con altri hypervisor come Xen e KVM.
 
-Le macchine virtuali VMware assegnate a indirizzi non SoftLayer (come le reti VMware NSX) non possono essere aggiunte direttamente come server di backend al programma di bilanciamento del carico. Tuttavia, a seconda della tua configurazione, può essere possibile configurare un intermediario come un gateway NSX che dispone di un indirizzo privato SoftLayer come server di backend al programma di bilanciamento del carico (con i server attuali che sono VM collegate alle reti gestite da VMware NSX).
+Le macchine virtuali VMWare assegnate a indirizzi non SoftLayer (come le reti VMWare NSX) non possono essere aggiunte direttamente come server di backend al programma di bilanciamento del carico. Tuttavia, a seconda della tua configurazione, può essere possibile configurare un intermediario, come un gateway NSX, che dispone di un indirizzo privato SoftLayer come server di backend al programma di bilanciamento del carico (con i server attuali che sono VM collegate alle reti gestite da VMware NSX).
 
 ## Se scelgo di utilizzare una VLAN pubblica nel mio account per distribuire il mio programma di bilanciamento del carico e ho un firewall distribuito sulla mia VLAN pubblica, quali configurazioni sono necessarie per il mio firewall in modo che funzioni con il mio servizio del programma di bilanciamento del carico?
 
-La porta TCP 56501 viene utilizzata per la gestione. Assicurati che il traffico a questa porta così come alle porte della tua applicazione non sia bloccato dal tuo firewall, altrimenti il provisioning del programma di bilanciamento del carico non funzionerà. 
+La porta TCP 56501 viene utilizzata per la gestione. Assicurati che il traffico a questa porta, così come alle porte della tua applicazione, non sia bloccato dal tuo firewall, altrimenti il provisioning del programma di bilanciamento del carico non funzionerà. 
 
+## Cosa devo fare quando ricevo un errore "This SoftLayer account is not linked to any Bluemix account"?
+
+Assicurati che il tuo account SoftLayer sia collegato al tuo account Bluemix. Fai riferimento a [Softlayer Link](https://console.bluemix.net/docs/account/softlayerlink.html#switching-to-ibmid) per ulteriori istruzioni.

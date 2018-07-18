@@ -7,7 +7,9 @@ Servicio IBM Cloud Load Balancer
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    whats-new-lbaaa.md
     explore-load-balancers.md
+    pricing.md
     naas-overview.md
     {: .navgroup-end}
 
@@ -16,10 +18,22 @@ Servicio IBM Cloud Load Balancer
     health-checks.md
     ssl-offload.md
     advanced-traffic.md
+    monitoring-metrics.md
+
+    {: .topicgroup}
+    Paso a paso: Mejora de la fiabilidad y la escalabilidad de las aplicaciones con el equilibrio de carga global
+        application-reliability.md
+        create-cis.md
+        input-domain.md
+        begin-config.md
+        identify-app-resources.md
+        define-global-lb.md
+
     {: .navgroup-end}
     
     {: .navgroup id="reference"}
     apis.md
+    external-resources.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}

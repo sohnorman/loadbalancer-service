@@ -2,12 +2,14 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="loadbalancer-service" audience="network" href="/docs/infrastructure/loadbalancer-service/getting-started.html"}
-IBM Cloud 로드 밸런서 서비스
+IBM Cloud Load Balancer Service
 
     {: .navgroup id="learn"}
     getting-started.md
     about.md
+    whats-new-lbaaa.md
     explore-load-balancers.md
+    pricing.md
     naas-overview.md
     {: .navgroup-end}
 
@@ -16,10 +18,22 @@ IBM Cloud 로드 밸런서 서비스
     health-checks.md
     ssl-offload.md
     advanced-traffic.md
+    monitoring-metrics.md
+
+    {: .topicgroup}
+    단계별: 글로벌 로드 밸런싱으로 애플리케이션 안정성 및 확장성 개선
+        application-reliability.md
+        create-cis.md
+        input-domain.md
+        begin-config.md
+        identify-app-resources.md
+        define-global-lb.md
+
     {: .navgroup-end}
     
     {: .navgroup id="reference"}
     apis.md
+    external-resources.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}

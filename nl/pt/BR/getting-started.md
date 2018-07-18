@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-04-13"
 
 ---
 
@@ -16,8 +16,18 @@ lastupdated: "2017-08-21"
 
 
 # Introdução
+Para começar a usar o IBM Cloud Load Balancer, você precisará de dois itens principais:
 
-Para começar a usar o serviço IBM Cloud Load Balancer, selecione **Rede > Balanceadores de carga > IBM Cloud Load Balancer** no catálogo do IBM Cloud, em seguida, execute o procedimento a seguir:
+* Uma conta com a IBM: [IBMid](https://www.ibm.com/account/us-en/signup/register.html)
+* Um servidor IBM, [Bare Metal](https://console.bluemix.net/docs/bare-metal/about.html#getting-started-with-bare-metal-servers) ou [Virtual Server Instance (VSI)](https://console.bluemix.net/docs/vsi/vsi_index.html#getting-started-with-virtual-servers)
+ 
+Se você precisar de assistência na obtenção de uma conta **IBMid**, entre em contato com o [Representante de vendas IBM](https://www.ibm.com/cloud-computing/bluemix/contact-us) para obter orientação adicional.
+
+Se você tiver uma conta existente do IBM Cloud Infrastructure (SoftLayer), será possível [vincular sua conta](https://console.bluemix.net/docs/account/softlayerlink.html#unifyingaccounts) a seu IBMid. 
+
+## Solicitando um balanceador de carga
+
+Para solicitar um serviço IBM Cloud Load Balancer, selecione **Rede > Load Balancers > IBM Cloud Load Balancer** no [Catálogo do IBM Cloud](https://console.bluemix.net/catalog/infrastructure/load-balancer-group). Efetue login ou crie uma nova conta, em seguida, execute o procedimento a seguir:
 
 1. Selecione seu data center e revise o plano de serviço. Clique em **Avançar**.
 2. Selecione a sub-rede na qual gostaria de implementar o balanceador de carga. A instância do serviço de balanceador de carga terá uma de suas interfaces de rede nesta sub-rede. Assegure-se de que seus servidores de aplicativos estejam nessa sub-rede ou sejam acessíveis nessa sub-rede. Se necessário, ative a ampliação da VLAN. Clique em **Avançar**.

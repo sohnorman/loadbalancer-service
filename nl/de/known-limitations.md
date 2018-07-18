@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017
-lastupdated: "2017-08-21"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -27,7 +27,7 @@ Der IBM Cloud Load Balancer-Service weist derzeit die folgenden Probleme auf:
 * Auf die Darstellung begrenzt - Die Preisinformationen auf der Überprüfungsseite sind auf zwei Dezimalstellen gerundet. Die korrekten Preise finden Sie in den Preisstrukturinformationen auf der Planseite.
 
 ## Bekannte Einschränkungen
-Der IBM Cloud Load Balancer-Service weist derzeit die folgenden Einschränkungen auf: 
+Der IBM Cloud Load Balancer-Service weist derzeit die folgenden Einschränkungen auf:
 
 * Maximale Anzahl an virtuellen Ports bzw. Protokollen: 10
 * Maximale Anzahl der Server hinter der Lastausgleichsfunktion: 50
