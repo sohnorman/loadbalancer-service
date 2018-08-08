@@ -28,7 +28,7 @@ Scroll to the right to view the rest of the table!
 |**Layer 4 LB**|Yes|Yes|Yes|Yes|Yes |
 |**Layer 7 LB**|No|Cookie Persistence|Cookie Persistence|Yes|Yes |
 |**Health Checks**|Yes|Yes|Yes|Yes|Yes |
-|**Horizontal Scaling**|Yes|No|No|No|No |
+|**Horizontal Scaling**|Yes|No|Yes|No|No |
 |**SSL Offload**|Yes|Yes|Yes|Yes|Yes |
 |**Management**|via IBM Portal|via IBM Portal|via IBM Portal|Self-manage (Vendor GUI)|Self-manage (Vendor GUI) |
 |**High Availability**|Built-in|Built-in|Optional|Optional|Optional |
